@@ -7,6 +7,7 @@ public enum PhaseType
     TurnStart,
     FortressBuild,
     MainPhase,
+    ActionPhase,
     EndPhase,
     NoPhase
 }
@@ -17,6 +18,8 @@ public class CombatManager : MonoBehaviour
     public Character player2;
     public Character currentPlayer;
     public PhaseType currPhase = PhaseType.NoPhase;
+
+    private float timer = 0f;
 
     void Start()
     {
@@ -37,22 +40,32 @@ public class CombatManager : MonoBehaviour
         switch (currPhase)
         {
             case PhaseType.TurnStart:
+                Camera.main.GetComponent<CameraFollow>().SetTarget(currentPlayer.transform);
                 currentPlayer.TurnReset();
-                currPhase = PhaseType.MainPhase;
-                if (!player1.hasFortress || !player2.hasFortress)
+                // wait some amount of time before moving on
+                timer += Time.deltaTime;
+                if (timer > 2f)
                 {
-                    currPhase = PhaseType.FortressBuild;
+                    currPhase = PhaseType.MainPhase;
+                    currentPlayer.myTurn = true;
+                    if (!player1.hasFortress || !player2.hasFortress)
+                    {
+                        currPhase = PhaseType.FortressBuild;
+                    }
+                    timer = 0f;
                 }
                 break;
             case PhaseType.FortressBuild:
                 // some animation triggering?
                 if(!player1.hasFortress)
                 {
-                    player1.BuildFortress();
+                    // TODO figure where this should go.
+                    player1.BuildFortress(-8.23f, 4.12f);
                 }
                 if (!player2.hasFortress)
                 {
-                    player2.BuildFortress();
+                    // TODO figure where this should go.
+                    player2.BuildFortress(57.27107f, 2.984606f);
                 }
                 if(currentPlayer.isReady)
                 {
@@ -62,8 +75,11 @@ public class CombatManager : MonoBehaviour
             case PhaseType.MainPhase:
                 if (currentPlayer.turnDone)
                 {
-                    currPhase = PhaseType.EndPhase;
+                    currPhase = PhaseType.ActionPhase;
                 }
+                break;
+            case PhaseType.ActionPhase:
+                currPhase = PhaseType.EndPhase;
                 break;
             case PhaseType.EndPhase:
                 // change who's turn it is
