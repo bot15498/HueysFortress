@@ -209,11 +209,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1598857127}
         m_TargetAssemblyTypeName: HumanCoordinator, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: PlaceWall
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -388,7 +388,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 400737487}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1598857127}
+        m_TargetAssemblyTypeName: HumanCoordinator, Assembly-CSharp
+        m_MethodName: PlaceTurret
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &400737487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,7 +657,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 731107567}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 894620505}
+        m_TargetAssemblyTypeName: HumanCoordinator, Assembly-CSharp
+        m_MethodName: PlaceTurret
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &731107567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,6 +988,7 @@ MonoBehaviour:
   myTurn: 0
   turnDone: 0
   hasFortress: 0
+  combatManager: {fileID: 383572174}
   fortressPrefab: {fileID: 2885037681929275016, guid: b3da040d843dabc4ab4f8a8a9ac335bd, type: 3}
   isReady: 1
   mpTextBox: {fileID: 848161770}
@@ -980,6 +1005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillsMenu: {fileID: 1505319513}
+  wallPrefab: {fileID: 346879405238476150, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
+  turretPrefab: {fileID: 2531062132510553553, guid: aba76f5568b7e21408bfede8ecfaa900, type: 3}
 --- !u!1 &961997404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,7 +1751,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1254957925}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 894620505}
+        m_TargetAssemblyTypeName: HumanCoordinator, Assembly-CSharp
+        m_MethodName: PlaceWall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1254957925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2082,9 +2121,6 @@ GameObject:
   - component: {fileID: 1598857122}
   - component: {fileID: 1598857121}
   - component: {fileID: 1598857123}
-  - component: {fileID: 1598857126}
-  - component: {fileID: 1598857125}
-  - component: {fileID: 1598857124}
   - component: {fileID: 1598857127}
   m_Layer: 0
   m_Name: Player1
@@ -2181,49 +2217,10 @@ MonoBehaviour:
   myTurn: 0
   turnDone: 0
   hasFortress: 0
+  combatManager: {fileID: 383572174}
   fortressPrefab: {fileID: 8615446460094498393, guid: 57bb7ebb6a7878f4c848b540cc4cc95a, type: 3}
   isReady: 1
   mpTextBox: {fileID: 668328718}
---- !u!114 &1598857124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598857120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ec2de7ab38fb64cae171fcbecc3980, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 2
---- !u!114 &1598857125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598857120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ff83d3d2f4c46f41adf7fc6183e9896, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 2
-  isBuilt: 0
---- !u!114 &1598857126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1598857120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cdb30ac2329c824bbb3a096caf2afb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 1
 --- !u!114 &1598857127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2237,6 +2234,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillsMenu: {fileID: 840333554}
+  wallPrefab: {fileID: 346879405238476150, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
+  turretPrefab: {fileID: 2531062132510553553, guid: aba76f5568b7e21408bfede8ecfaa900, type: 3}
 --- !u!1 &1697530538
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,62 +2999,3 @@ Transform:
   m_Father: {fileID: 1598857122}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1819187422643870008
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 346879405238476150, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_Name
-      value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685315615146455180, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6e048d9e68d736f47adf51468d6b6ed9, type: 3}

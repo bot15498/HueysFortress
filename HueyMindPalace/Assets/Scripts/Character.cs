@@ -12,9 +12,11 @@ public class Character : MonoBehaviour
     public bool myTurn = false;
     public bool turnDone = false;
     public bool hasFortress = false;
+    public CombatManager combatManager;
     public GameObject fortressPrefab;
     public bool isReady = true;
     public TextMeshProUGUI mpTextBox;
+    public List<PlacedObject> buildings = new List<PlacedObject>();
 
     private HumanCoordinator humanCoord;
     private AiCoordinator aiCoord;
@@ -37,7 +39,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (myTurn)
+        if (myTurn && combatManager.currPhase == PhaseType.MainPhase)
         {
             // ask the coordinator what to do, they probably know.
             if (humanCoord != null)
@@ -79,7 +81,7 @@ public class Character : MonoBehaviour
         myTurn = false;
     }
 
-    public void BuildBuildingAtLocation(GameObject prefab, float xval)
+    public void BuildBuildingAtLocation(GameObject prefab, Vector3 worldPos)
     {
 
     }

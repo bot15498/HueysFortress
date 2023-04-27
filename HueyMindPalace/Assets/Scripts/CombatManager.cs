@@ -44,7 +44,7 @@ public class CombatManager : MonoBehaviour
                 currentPlayer.TurnReset();
                 // wait some amount of time before moving on
                 timer += Time.deltaTime;
-                if (timer > 2f)
+                if (timer > 1f)
                 {
                     currPhase = PhaseType.MainPhase;
                     currentPlayer.myTurn = true;
