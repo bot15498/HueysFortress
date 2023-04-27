@@ -15,24 +15,46 @@ public class Character : MonoBehaviour
     public GameObject fortressPrefab;
     public bool isReady = true;
     public TextMeshProUGUI mpTextBox;
-    public GameObject skillsMenu;
+
+    private HumanCoordinator humanCoord;
+    private AiCoordinator aiCoord;
 
     // Start is called before the first frame update
     void Start()
     {
         currFortressHealth = maxFortressHealth;
         mpTextBox.text = string.Format("Current MP: {0}/{1}", currMp, maxMP);
+        if (GetComponent<HumanCoordinator>() != null)
+        {
+            humanCoord = GetComponent<HumanCoordinator>();
+        }
+        if (GetComponent<AiCoordinator>() != null)
+        {
+            aiCoord = GetComponent<AiCoordinator>();
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        if (myTurn)
+        {
+            // ask the coordinator what to do, they probably know.
+            if (humanCoord != null)
+            {
+                humanCoord.StartCoordinator();
+            }
+            else if (aiCoord != null)
+            {
+                aiCoord.StartCoordinator();
+            }
+        }
     }
 
-    public void BuildFortress()
+    public void BuildFortress(float x, float y)
     {
-        Instantiate(fortressPrefab);
+        // Builds the initial fortress.
+        Instantiate(fortressPrefab, new Vector3(x, y), Quaternion.identity);
         Debug.Log("Creating fortress");
         hasFortress = true;
     }
@@ -51,21 +73,14 @@ public class Character : MonoBehaviour
         currMp = newMp;
     }
 
-    public void ShowSkillsMenu()
-    {
-        skillsMenu.SetActive(true);
-        // Spawn in available buttons.
-    }
-
-    public void HideSkillsMenu()
-    {
-        skillsMenu.SetActive(false);
-    }
-
     public void EndTurn()
     {
-        HideSkillsMenu();
         turnDone = true;
         myTurn = false;
+    }
+
+    public void BuildBuildingAtLocation(GameObject prefab, float xval)
+    {
+
     }
 }

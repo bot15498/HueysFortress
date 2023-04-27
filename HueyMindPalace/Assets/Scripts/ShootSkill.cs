@@ -27,7 +27,7 @@ public class ShootSkill : MonoBehaviour, ISkill
     public void Use()
     {
         // hid skill menu on parent.
-        player.HideSkillsMenu();
+        //player.HideSkillsMenu();
         // spawn arm in.
         // subtract MP from character.
         player.SetCurrMp(player.currMp - cost);
