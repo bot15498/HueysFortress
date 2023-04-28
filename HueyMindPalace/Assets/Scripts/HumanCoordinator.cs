@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HumanCoordinator : MonoBehaviour
 {
@@ -8,10 +9,13 @@ public class HumanCoordinator : MonoBehaviour
     public GameObject wallPrefab;
     public GameObject turretPrefab;
 
+
     private Character player;
     private bool isPlacing;
+    private bool iscurrentTurn;
     private GameObject placingObject;
     private PlacedObject placingObjectPlaced;
+    private bool SkillsOpen;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +24,8 @@ public class HumanCoordinator : MonoBehaviour
         HideSkillsMenu();
         placingObject = null;
         isPlacing = false;
+        iscurrentTurn = false;
+        SkillsOpen = false;
     }
 
     // Update is called once per frame
@@ -48,6 +54,7 @@ public class HumanCoordinator : MonoBehaviour
     {
         // This is run when the player is asking what to do.
         ShowSkillsMenu();
+        iscurrentTurn = true;
         Camera.main.GetComponent<CameraFollow>().FollowCursor();
     }
 
@@ -85,5 +92,32 @@ public class HumanCoordinator : MonoBehaviour
         isPlacing = true;
         placingObject = Instantiate(turretPrefab, player.transform);
         placingObjectPlaced = placingObject.GetComponent<PlacedObject>();
+    }
+
+    private void OnMouseDown()
+    {
+        if(iscurrentTurn == true)
+        {
+            toggleSkillUI();
+        }
+       
+    }
+
+    private void toggleSkillUI()
+    {
+        if (SkillsOpen == false)
+        {
+            skillsMenu.SetActive(true);
+            skillsMenu.GetComponent<SkillsAnimation>().openMenu();
+            SkillsOpen = true;
+        }else if(SkillsOpen == true)
+        {
+
+            skillsMenu.GetComponent<SkillsAnimation>().closeMenu();
+            //skillsMenu.SetActive(false);
+            SkillsOpen = false;
+        }
+
+        
     }
 }
