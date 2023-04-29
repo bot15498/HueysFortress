@@ -15,7 +15,6 @@ public class Character : MonoBehaviour
     public CombatManager combatManager;
     public GameObject fortressPrefab;
     public bool isReady = true;
-    public TextMeshProUGUI mpTextBox;
     public List<PlacedObject> buildings = new List<PlacedObject>();
 
     private HumanCoordinator humanCoord;
@@ -25,7 +24,6 @@ public class Character : MonoBehaviour
     void Start()
     {
         currFortressHealth = maxFortressHealth;
-        mpTextBox.text = string.Format("Current MP: {0}/{1}", currMp, maxMP);
         if (GetComponent<HumanCoordinator>() != null)
         {
             humanCoord = GetComponent<HumanCoordinator>();
@@ -71,7 +69,6 @@ public class Character : MonoBehaviour
 
     public void SetCurrMp(int newMp)
     {
-        mpTextBox.text = string.Format("Current MP: {0}/{1}", currMp, maxMP);
         currMp = newMp;
     }
 

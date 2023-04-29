@@ -18,6 +18,7 @@ public class CombatManager : MonoBehaviour
     public Character player2;
     public Character currentPlayer;
     public PhaseType currPhase = PhaseType.NoPhase;
+    public int turnNumber = 0;
 
     private float timer = 0f;
 
@@ -40,6 +41,10 @@ public class CombatManager : MonoBehaviour
         switch (currPhase)
         {
             case PhaseType.TurnStart:
+                if (currentPlayer == player1)
+                {
+                    turnNumber++;
+                }
                 Camera.main.GetComponent<CameraFollow>().SetTarget(currentPlayer.transform);
                 currentPlayer.TurnReset();
                 // wait some amount of time before moving on

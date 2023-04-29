@@ -11,6 +11,7 @@ public class Wall : MonoBehaviour, PlacedObject
     public float turretYcoord;
     public int maxHealth = 2;
     public int currHealth = 2;
+    public Turret turret;
 
     private bool _isPlaced = false;
     private bool _lastPlaced = false;
@@ -18,7 +19,6 @@ public class Wall : MonoBehaviour, PlacedObject
     private SpriteRenderer sprite;
     private CombatManager combat;
     private Character owner;
-    private Turret turret;
 
     public bool isPlaced { get => _isPlaced; set => _isPlaced=value; }
     public bool lastPlaced { get => _lastPlaced; set => _lastPlaced=value; }
