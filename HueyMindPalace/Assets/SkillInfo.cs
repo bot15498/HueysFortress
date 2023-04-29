@@ -21,6 +21,7 @@ public class SkillInfo : MonoBehaviour
     public GameObject cooldownObject;
     private bool onCooldown;
     public UnityEvent SkillPreview;
+    private CombatManager combat;
     Character playercharacter;
     public bool infiniteUses;
     static bool ispreviewingSkill;
@@ -44,7 +45,9 @@ public class SkillInfo : MonoBehaviour
         cooldownObject.SetActive(false);
         onCooldown = false;
         CooldownFill = cooldownObject.GetComponent<Image>();
-        playercharacter = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>().player1;
+        combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
+        playercharacter = combat.player1;
+        playercharacter.skillInfos.Add(this);
         ispreviewingSkill = false;
         iconColo = GetComponent<Image>();
         iconColor = iconColo.color;
@@ -76,9 +79,8 @@ public class SkillInfo : MonoBehaviour
         }
     }
 
-    void tickCooldown()
+    public void tickCooldown()
     {
-
         //INSERT END TURN STUFF
         if (onCooldown == true)
         {
@@ -91,6 +93,7 @@ public class SkillInfo : MonoBehaviour
             onCooldown = false;
             cooldownObject.SetActive(false);
             currentCooldown = maxCooldown;
+            CooldownText.text = currentCooldown.ToString();
         }
     }
 
@@ -121,9 +124,10 @@ public class SkillInfo : MonoBehaviour
         if(Canceled == true)
         {
             ispreviewingSkill = false;
-        }else 
-        if(Canceled == false)
+        }
+        else if(Canceled == false)
         {
+            ispreviewingSkill = false;
             StartCooldown();
             if(infiniteUses == false)
             {

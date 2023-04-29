@@ -18,6 +18,7 @@ public class CombatManager : MonoBehaviour
     public Character player2;
     public Character currentPlayer;
     public PhaseType currPhase = PhaseType.NoPhase;
+    public int turnNumber = 1;
 
     private float timer = 0f;
 
@@ -86,10 +87,13 @@ public class CombatManager : MonoBehaviour
                 if (currentPlayer == player1)
                 {
                     currentPlayer = player2;
+                    TickAllSkillInfo(player2);
                 }
                 else
                 {
                     currentPlayer = player1;
+                    TickAllSkillInfo(player1);
+                    turnNumber++;
                 }
                 currPhase = PhaseType.TurnStart;
                 break;
@@ -97,6 +101,14 @@ public class CombatManager : MonoBehaviour
                 // If this happens something bad happeneed. 
                 currPhase = PhaseType.TurnStart;
                 break;
+        }
+    }
+
+    private void TickAllSkillInfo(Character player)
+    {
+        foreach(SkillInfo skill in player.skillInfos)
+        {
+            skill.tickCooldown();
         }
     }
 }

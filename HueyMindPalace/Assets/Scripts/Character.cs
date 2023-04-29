@@ -25,42 +25,17 @@ public class Character : MonoBehaviour
     public Image healthBar;
     public Image ShieldBar;
     public GameObject shieldobject;
-
-
-    private HumanCoordinator humanCoord;
-    private AiCoordinator aiCoord;
+    public List<SkillInfo> skillInfos = new List<SkillInfo>();
 
     // Start is called before the first frame update
     void Start()
     {
-        currFortressHealth = maxFortressHealth;
-        if (GetComponent<HumanCoordinator>() != null)
-        {
-            humanCoord = GetComponent<HumanCoordinator>();
-        }
-        if (GetComponent<AiCoordinator>() != null)
-        {
-            aiCoord = GetComponent<AiCoordinator>();
-        }
         uimanager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UiManager>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (myTurn && combatManager.currPhase == PhaseType.MainPhase)
-        {
-            // ask the coordinator what to do, they probably know.
-            if (humanCoord != null)
-            {
-                humanCoord.StartCoordinator();
-            }
-            else if (aiCoord != null)
-            {
-                aiCoord.StartCoordinator();
-            }
-        }
-
         if (myTurn == true)
         {
             uimanager.updateManatext(maxMP,currMp);
@@ -68,7 +43,7 @@ public class Character : MonoBehaviour
             HealthText.text = currFortressHealth + "/" + maxFortressHealth;
         }
         
-        healthBar.fillAmount = maxFortressHealth / currFortressHealth;
+        healthBar.fillAmount = currFortressHealth / maxFortressHealth;
         if(maxShieldHealth > 0)
         {
             shieldobject.SetActive(true);
@@ -98,7 +73,6 @@ public class Character : MonoBehaviour
 
     public void SetCurrMp(int newMp)
     {
-       
         currMp = newMp;
     }
 
@@ -111,11 +85,6 @@ public class Character : MonoBehaviour
     {
         turnDone = true;
         myTurn = false;
-    }
-
-    public void BuildBuildingAtLocation(GameObject prefab, Vector3 worldPos)
-    {
-
     }
 
     public void TakeDamage(int damage)
