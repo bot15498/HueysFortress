@@ -76,7 +76,7 @@ public class Wall : MonoBehaviour, PlacedObject
         if(hit.collider.gameObject.tag == "Ground")
         {
             //fixedPos.y = hit.point.y;
-            Debug.Log(hit.point.y);
+            // Debug.Log(hit.point.y);
             fixedPos.y = hit.point.y;
             
         }

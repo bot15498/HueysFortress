@@ -768,7 +768,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 208941421}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1598857123}
+        m_TargetAssemblyTypeName: Character, Assembly-CSharp
+        m_MethodName: EndTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &208941421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2968,7 +2980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8091198b1f8afe141af554deb5a2599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCooldown: 20
+  maxCooldown: 2
   currentCooldown: 0
   manaCost: 2
   maxUses: 10
@@ -3829,7 +3841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8091198b1f8afe141af554deb5a2599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCooldown: 20
+  maxCooldown: 2
   currentCooldown: 0
   manaCost: 5
   maxUses: 10
@@ -4714,6 +4726,7 @@ GameObject:
   - component: {fileID: 894620503}
   - component: {fileID: 894620502}
   - component: {fileID: 894620504}
+  - component: {fileID: 894620505}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -4820,6 +4833,19 @@ MonoBehaviour:
   healthBar: {fileID: 252421500}
   ShieldBar: {fileID: 272588885}
   shieldobject: {fileID: 1252991091}
+  skillInfos: []
+--- !u!114 &894620505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894620501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d006c788bdf8d504791361f3f1d7d9c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &961997404
 GameObject:
   m_ObjectHideFlags: 0
@@ -8703,8 +8729,8 @@ MonoBehaviour:
   currFortressHealth: 5
   maxShieldHealth: 0
   currshieldHealth: 0
-  maxMP: 2
-  currMp: 2
+  maxMP: 50
+  currMp: 50
   myTurn: 0
   turnDone: 0
   hasFortress: 0
@@ -8716,6 +8742,7 @@ MonoBehaviour:
   healthBar: {fileID: 1899911418}
   ShieldBar: {fileID: 1653725153}
   shieldobject: {fileID: 1766034233}
+  skillInfos: []
 --- !u!61 &1598857128
 BoxCollider2D:
   m_ObjectHideFlags: 0

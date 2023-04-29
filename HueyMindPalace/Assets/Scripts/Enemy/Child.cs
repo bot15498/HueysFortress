@@ -24,7 +24,7 @@ public class Child : MonoBehaviour
     void Update()
     {
         // wait until it's my turn.
-        if (myChar.isReady && myChar.myTurn && !isThinking)
+        if (myChar.isReady && myChar.myTurn && combat.currPhase == PhaseType.MainPhase && !isThinking)
         {
             StartCoroutine(DoTurn());
             isThinking = true;

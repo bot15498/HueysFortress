@@ -25,6 +25,7 @@ public class Character : MonoBehaviour
     public Image healthBar;
     public Image ShieldBar;
     public GameObject shieldobject;
+    public List<SkillInfo> skillInfos = new List<SkillInfo>();
 
     // Start is called before the first frame update
     void Start()
@@ -84,11 +85,6 @@ public class Character : MonoBehaviour
     {
         turnDone = true;
         myTurn = false;
-    }
-
-    public void BuildBuildingAtLocation(GameObject prefab, Vector3 worldPos)
-    {
-
     }
 
     public void TakeDamage(int damage)

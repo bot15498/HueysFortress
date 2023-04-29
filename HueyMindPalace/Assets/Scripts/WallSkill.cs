@@ -43,6 +43,8 @@ public class WallSkill : MonoBehaviour
             {
                 // right click, cancel placement
                 skillInfo.endskillPreview(true);
+                Destroy(wallToPlace.gameObject);
+                wallToPlace = null;
             }
         }
     }
