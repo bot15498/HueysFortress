@@ -22,7 +22,7 @@ public class SkillInfo : MonoBehaviour
     private bool onCooldown;
     public UnityEvent SkillPreview;
     private CombatManager combat;
-    Character playercharacter;
+    public Character playercharacter;
     public bool infiniteUses;
     static bool ispreviewingSkill;
     public Sprite SkillIcon;
@@ -46,7 +46,11 @@ public class SkillInfo : MonoBehaviour
         onCooldown = false;
         CooldownFill = cooldownObject.GetComponent<Image>();
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
-        playercharacter = combat.player1;
+        if (playercharacter == null)
+        {
+            // if no player is specified, default to player 1
+            playercharacter = combat.player1;
+        }
         playercharacter.skillInfos.Add(this);
         ispreviewingSkill = false;
         iconColo = GetComponent<Image>();

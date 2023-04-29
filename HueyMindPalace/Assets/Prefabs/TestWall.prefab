@@ -102,6 +102,10 @@ MonoBehaviour:
   turretPrefab: {fileID: 0}
   turretXcoord: 0
   turretYcoord: 3.5
+  maxHealth: 2
+  currHealth: 2
+  turret: {fileID: 0}
+  owner: {fileID: 0}
 --- !u!61 &1451349600701700149
 BoxCollider2D:
   m_ObjectHideFlags: 0
