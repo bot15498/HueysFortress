@@ -1,27 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
-public class Wall : MonoBehaviour, PlacedObject
+public class Library : MonoBehaviour, PlacedObject
 {
-    public int cost = 2;
-    public GameObject turretPrefab;
-    public float turretXcoord;
-    public float turretYcoord;
-    public int maxHealth = 2;
-    public int currHealth = 2;
-    public Turret turret;
     public Character owner;
+    public int mpIncrease = 2;
 
     private bool _isPlaced = false;
     private bool _lastPlaced = false;
     private BoxCollider2D box2d;
     private SpriteRenderer sprite;
     private CombatManager combat;
-
-    public bool isPlaced { get => _isPlaced; set => _isPlaced=value; }
-    public bool lastPlaced { get => _lastPlaced; set => _lastPlaced=value; }
+    public bool isPlaced { get => _isPlaced; set => _isPlaced = value; }
+    public bool lastPlaced { get => _lastPlaced; set => _lastPlaced = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +28,10 @@ public class Wall : MonoBehaviour, PlacedObject
             combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
             owner = combat.currentPlayer;
         }
+
+        // When a library is built, increase max mana.
+        owner.maxMP += mpIncrease;
+        owner.currMp += mpIncrease;
     }
 
     // Update is called once per frame
@@ -66,16 +62,14 @@ public class Wall : MonoBehaviour, PlacedObject
 
         int groundmask = 1 << 6;
         Vector3 dir = (new Vector3(0, -1, 0));
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0,10,0), dir, Mathf.Infinity,groundmask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 10, 0), dir, Mathf.Infinity, groundmask);
         //Debug.DrawRay(transform.position + new Vector3(0, 10, 0), dir * dist, Color.green);
-        if(hit.collider.gameObject.tag == "Ground")
+        if (hit.collider.gameObject.tag == "Ground")
         {
-            //fixedPos.y = hit.point.y;
-            // Debug.Log(hit.point.y);
             fixedPos.y = hit.point.y;
-            
+
         }
-        else if(hit.collider.gameObject.tag != "Ground")
+        else if (hit.collider.gameObject.tag != "Ground")
         {
             //fixedPos.y = hit.point.y;
         }
