@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
     public int maxFortressHealth = 5;
     public int currFortressHealth = 5;
+    public int maxShieldHealth;
+    public int currshieldHealth;
     public int maxMP = 3;
     public int currMp = 3;
     public bool myTurn = false;
@@ -15,8 +18,14 @@ public class Character : MonoBehaviour
     public CombatManager combatManager;
     public GameObject fortressPrefab;
     public bool isReady = true;
-    public TextMeshProUGUI mpTextBox;
     public List<PlacedObject> buildings = new List<PlacedObject>();
+    UiManager uimanager;
+    public TextMeshProUGUI HealthText;
+    public TextMeshProUGUI ShieldText;
+    public Image healthBar;
+    public Image ShieldBar;
+    public GameObject shieldobject;
+
 
     private HumanCoordinator humanCoord;
     private AiCoordinator aiCoord;
@@ -25,7 +34,6 @@ public class Character : MonoBehaviour
     void Start()
     {
         currFortressHealth = maxFortressHealth;
-        mpTextBox.text = string.Format("Current MP: {0}/{1}", currMp, maxMP);
         if (GetComponent<HumanCoordinator>() != null)
         {
             humanCoord = GetComponent<HumanCoordinator>();
@@ -34,6 +42,7 @@ public class Character : MonoBehaviour
         {
             aiCoord = GetComponent<AiCoordinator>();
         }
+        uimanager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UiManager>();
     }
 
     // Update is called once per frame
@@ -50,6 +59,24 @@ public class Character : MonoBehaviour
             {
                 aiCoord.StartCoordinator();
             }
+        }
+
+        if (myTurn == true)
+        {
+            uimanager.updateManatext(maxMP,currMp);
+            
+            HealthText.text = currFortressHealth + "/" + maxFortressHealth;
+        }
+        
+        healthBar.fillAmount = maxFortressHealth / currFortressHealth;
+        if(maxShieldHealth > 0)
+        {
+            shieldobject.SetActive(true);
+            ShieldBar.fillAmount = maxShieldHealth / currshieldHealth;
+            ShieldText.text = currshieldHealth + "/" + maxShieldHealth;
+        } else
+        {
+            shieldobject.SetActive(false);
         }
     }
 
@@ -71,8 +98,13 @@ public class Character : MonoBehaviour
 
     public void SetCurrMp(int newMp)
     {
-        mpTextBox.text = string.Format("Current MP: {0}/{1}", currMp, maxMP);
+       
         currMp = newMp;
+    }
+
+    public void PayMP(int mpCost)
+    {
+        currMp -= mpCost;
     }
 
     public void EndTurn()
