@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FignerGunStoreSkill : MonoBehaviour
 {
+    // this is for building the finger gun store.
     public GameObject storePrefab;
     public bool isPlacing = false;
 

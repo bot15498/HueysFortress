@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Wall : MonoBehaviour, PlacedObject
 {
@@ -11,8 +13,18 @@ public class Wall : MonoBehaviour, PlacedObject
     public float turretYcoord;
     public int maxHealth = 2;
     public int currHealth = 2;
+    public int maxShieldHealth = 0;
+    public int currshieldHealth = 0;
     public Turret turret;
     public Character owner;
+
+    UiManager uimanager;
+    public TextMeshProUGUI HealthText;
+    public TextMeshProUGUI ShieldText;
+    public Image healthBar;
+    public Image ShieldBar;
+    public GameObject shieldobject;
+    public GameObject healthCanvas;
 
     private bool _isPlaced = false;
     private bool _lastPlaced = false;
@@ -39,9 +51,21 @@ public class Wall : MonoBehaviour, PlacedObject
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        HealthText.text = currHealth + "/" + maxHealth;
 
+        healthBar.fillAmount = currHealth / maxHealth;
+        if (maxShieldHealth > 0)
+        {
+            shieldobject.SetActive(true);
+            ShieldBar.fillAmount = maxShieldHealth / currshieldHealth;
+            ShieldText.text = currshieldHealth + "/" + maxShieldHealth;
+        }
+        else
+        {
+            shieldobject.SetActive(false);
+        }
     }
 
     public void DisableAbility()
@@ -50,6 +74,7 @@ public class Wall : MonoBehaviour, PlacedObject
         isPlaced = false;
         box2d.enabled = false;
         sprite.color = new Color(0, 1, 0);
+        healthCanvas.SetActive(false);
     }
 
     public void EnableAbility()
@@ -57,6 +82,7 @@ public class Wall : MonoBehaviour, PlacedObject
         isPlaced = true;
         box2d.enabled = true;
         sprite.color = new Color(1, 1, 1);
+        healthCanvas.SetActive(true);
     }
 
     public Vector3 GetValidLocation(Vector3 worldpos)
