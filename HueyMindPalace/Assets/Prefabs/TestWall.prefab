@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 2
-  turret: {fileID: 0}
+  turretPrefab: {fileID: 0}
+  turretXcoord: 0
+  turretYcoord: 3.5
 --- !u!61 &1451349600701700149
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -116,7 +118,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 2.17}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.2}
     oldSize: {x: 6.56, y: 4.34}
     newSize: {x: 6.56, y: 4.34}
     adaptiveTilingThreshold: 0.5

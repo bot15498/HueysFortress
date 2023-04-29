@@ -6,13 +6,19 @@ using UnityEngine;
 public class Wall : MonoBehaviour, PlacedObject
 {
     public int cost = 2;
-    public Turret turret;
+    public GameObject turretPrefab;
+    public float turretXcoord;
+    public float turretYcoord;
+    public int maxHealth = 2;
+    public int currHealth = 2;
 
     private bool _isPlaced = false;
     private bool _lastPlaced = false;
     private BoxCollider2D box2d;
     private SpriteRenderer sprite;
-    
+    private CombatManager combat;
+    private Character owner;
+    private Turret turret;
 
     public bool isPlaced { get => _isPlaced; set => _isPlaced=value; }
     public bool lastPlaced { get => _lastPlaced; set => _lastPlaced=value; }
@@ -24,6 +30,12 @@ public class Wall : MonoBehaviour, PlacedObject
         sprite = GetComponent<SpriteRenderer>();
         LayerMask groundmask = LayerMask.GetMask("Ground");
         DisableAbility();
+        if (combat == null)
+        {
+            // assume on creation, that the owner is whoever turn it is. 
+            combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
+            owner = combat.currentPlayer;
+        }
     }
 
     // Update is called once per frame
@@ -79,5 +91,23 @@ public class Wall : MonoBehaviour, PlacedObject
         // TODO check for overlaps here
 
         return fixedPos;
+    }
+
+    public void BuildTurret()
+    {
+        // for building a turret on top of this wall.
+        // the turret will always be in the same position
+        GameObject turretObj = Instantiate(turretPrefab, transform);
+        turretObj.transform.position = new Vector3(turretXcoord, turretYcoord);
+        turret = turretObj.GetComponent<Turret>();
+    }
+
+    public void ShootTurret()
+    {
+        // Tell the turret to start aiming, and then handle the 
+        if (turret != null)
+        {
+            turret.StartAiming();
+        }
     }
 }

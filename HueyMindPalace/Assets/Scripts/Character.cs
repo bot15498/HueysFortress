@@ -117,4 +117,9 @@ public class Character : MonoBehaviour
     {
 
     }
+
+    public void TakeDamage(int damage)
+    {
+        currFortressHealth = Mathf.Max(currFortressHealth - damage, 0);
+    }
 }
