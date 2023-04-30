@@ -29,10 +29,19 @@ public class LibrarySkill : MonoBehaviour
             Vector3 mousePos = Input.mousePosition;
             Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
             worldMousePos.z = 0f;
-            worldMousePos = libraryToPlace.GetValidLocation(worldMousePos);
+            bool validLocation = libraryToPlace.GetValidLocation(ref worldMousePos);
             libraryToPlace.transform.position = worldMousePos;
 
-            if (Input.GetMouseButtonDown(0))
+            if (validLocation)
+            {
+                libraryToPlace.SetCanPlaceColor();
+            }
+            else
+            {
+                libraryToPlace.SetNoPlaceColor();
+            }
+
+            if (validLocation && Input.GetMouseButtonDown(0))
             {
                 // left click, place ability. 
                 libraryToPlace.EnableAbility();

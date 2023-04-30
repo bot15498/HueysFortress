@@ -28,10 +28,19 @@ public class WallSkill : MonoBehaviour
             Vector3 mousePos = Input.mousePosition;
             Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
             worldMousePos.z = 0f;
-            worldMousePos = wallToPlace.GetValidLocation(worldMousePos);
+            bool validLocation = wallToPlace.GetValidLocation(ref worldMousePos);
             wallToPlace.transform.position = worldMousePos;
 
-            if (Input.GetMouseButtonDown(0))
+            if (validLocation)
+            {
+                wallToPlace.SetCanPlaceColor();
+            }
+            else
+            {
+                wallToPlace.SetNoPlaceColor();
+            }
+
+            if (validLocation && Input.GetMouseButtonDown(0))
             {
                 // left click, place ability. 
                 wallToPlace.EnableAbility();
@@ -56,5 +65,21 @@ public class WallSkill : MonoBehaviour
         player = combat.currentPlayer;
         GameObject wallObj = Instantiate(wallPrefab, player.gameObject.transform);
         wallToPlace = wallObj.GetComponent<Wall>();
+    }
+
+    public Wall PlaceWall(Vector3 location)
+    {
+        // place the wall without thinking. 
+        isPlacing = false;
+        player = combat.currentPlayer;
+        GameObject wallObj = Instantiate(wallPrefab, player.gameObject.transform);
+        wallToPlace = wallObj.GetComponent<Wall>();
+
+        bool validLocation = wallToPlace.GetValidLocation(ref location);
+        // dangerou piece of code that just keeps trying to find a spot. 
+        wallToPlace.transform.position = location;
+        wallToPlace = wallObj.GetComponent<Wall>();
+        wallToPlace = null;
+        return wallObj.GetComponent<Wall>();
     }
 }

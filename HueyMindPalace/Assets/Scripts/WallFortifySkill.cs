@@ -30,10 +30,14 @@ public class WallFortifySkill : MonoBehaviour
         // give wall shield. 
         wall.maxShieldHealth += shieldAmount;
         wall.currshieldHealth += shieldAmount;
+        skillInfo.endskillPreview(false);
     }
 
     public void SacrificeWall()
     {
-
+        wall.owner.maxShieldHealth += wall.currHealth;
+        wall.owner.currshieldHealth += wall.currHealth;
+        Destroy(wall.gameObject);
+        skillInfo.endskillPreview(false);
     }
 }

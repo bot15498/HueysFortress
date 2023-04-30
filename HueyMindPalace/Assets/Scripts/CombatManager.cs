@@ -60,13 +60,11 @@ public class CombatManager : MonoBehaviour
                 // some animation triggering?
                 if(!player1.hasFortress)
                 {
-                    // TODO figure where this should go.
-                    player1.BuildFortress(-8.23f, 4.12f);
+                    player1.BuildFortress();
                 }
                 if (!player2.hasFortress)
                 {
-                    // TODO figure where this should go.
-                    player2.BuildFortress(57.27107f, 2.984606f);
+                    player2.BuildFortress();
                 }
                 if(currentPlayer.isReady)
                 {

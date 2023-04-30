@@ -29,10 +29,19 @@ public class FignerGunStoreSkill : MonoBehaviour
             Vector3 mousePos = Input.mousePosition;
             Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
             worldMousePos.z = 0f;
-            worldMousePos = storeToPlace.GetValidLocation(worldMousePos);
+            bool validLocation = storeToPlace.GetValidLocation(ref worldMousePos);
             storeToPlace.transform.position = worldMousePos;
 
-            if (Input.GetMouseButtonDown(0))
+            if(validLocation)
+            {
+                storeToPlace.SetCanPlaceColor();
+            }
+            else
+            {
+                storeToPlace.SetNoPlaceColor();
+            }
+
+            if (validLocation && Input.GetMouseButtonDown(0))
             {
                 // left click, place ability. 
                 storeToPlace.EnableAbility();

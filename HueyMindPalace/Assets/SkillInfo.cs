@@ -48,8 +48,8 @@ public class SkillInfo : MonoBehaviour
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
         if (playercharacter == null)
         {
-            // if no player is specified, default to player 1
-            playercharacter = combat.player1;
+            // if no player is specified, default to current player
+            playercharacter = combat.currentPlayer;
         }
         playercharacter.skillInfos.Add(this);
         ispreviewingSkill = false;
@@ -114,13 +114,18 @@ public class SkillInfo : MonoBehaviour
 
     public void ActivateSkillPreview()
     {
-        if (onCooldown != true && ispreviewingSkill == false && playercharacter.currMp >= manaCost && (currentUses > 0 || infiniteUses == true))
+        if (CanUseSkill())
         {
             ispreviewingSkill = true;
             SkillPreview.Invoke();
 
         }
 
+    }
+
+    public bool CanUseSkill()
+    {
+        return onCooldown != true && ispreviewingSkill == false && playercharacter.currMp >= manaCost && (currentUses > 0 || infiniteUses == true);
     }
 
     public void endskillPreview(bool Canceled)

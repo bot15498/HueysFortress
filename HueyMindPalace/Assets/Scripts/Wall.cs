@@ -17,6 +17,7 @@ public class Wall : MonoBehaviour, PlacedObject
     public int currshieldHealth = 0;
     public Turret turret;
     public Character owner;
+    public GameObject skillsMenu;
 
     UiManager uimanager;
     public TextMeshProUGUI HealthText;
@@ -28,9 +29,13 @@ public class Wall : MonoBehaviour, PlacedObject
 
     private bool _isPlaced = false;
     private bool _lastPlaced = false;
-    private BoxCollider2D box2d;
+    private PolygonCollider2D collider2d;
+    private BoxCollider2D validPlaceTrigger;
     private SpriteRenderer sprite;
     private CombatManager combat;
+    private bool skillsOpen;
+    private bool canPlaceColorControl = false;
+    private bool canPlace = true;
 
     public bool isPlaced { get => _isPlaced; set => _isPlaced=value; }
     public bool lastPlaced { get => _lastPlaced; set => _lastPlaced=value; }
@@ -38,7 +43,7 @@ public class Wall : MonoBehaviour, PlacedObject
     // Start is called before the first frame update
     void Start()
     {
-        box2d = GetComponent<BoxCollider2D>();
+        collider2d = GetComponent<PolygonCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         LayerMask groundmask = LayerMask.GetMask("Ground");
         DisableAbility();
@@ -72,24 +77,41 @@ public class Wall : MonoBehaviour, PlacedObject
     {
         // when something isn't placed, disable a bunch of stuff.
         isPlaced = false;
-        box2d.enabled = false;
-        sprite.color = new Color(0, 1, 0);
+        collider2d.enabled = false;
+        SetCanPlaceColor();
         healthCanvas.SetActive(false);
     }
 
     public void EnableAbility()
     {
         isPlaced = true;
-        box2d.enabled = true;
+        collider2d.enabled = true;
         sprite.color = new Color(1, 1, 1);
         healthCanvas.SetActive(true);
     }
 
-    public Vector3 GetValidLocation(Vector3 worldpos)
+    public void SetCanPlaceColor()
     {
-        // Clamp the wall to be at y=0
-        Vector3 fixedPos = worldpos;
+        // prevent spamming.
+        if (!canPlaceColorControl && sprite != null)
+        {
+            sprite.color = new Color(0, 1, 0);
+            canPlaceColorControl = true;
+        }
+    }
 
+    public void SetNoPlaceColor()
+    {
+        // prevent spamming.
+        if (canPlaceColorControl && sprite != null)
+        {
+            sprite.color = new Color(1, 0, 0);
+            canPlaceColorControl = false;
+        }
+    }
+
+    public bool GetValidLocation(ref Vector3 worldpos)
+    {
         int groundmask = 1 << 6;
         Vector3 dir = (new Vector3(0, -1, 0));
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0,10,0), dir, Mathf.Infinity,groundmask);
@@ -98,19 +120,35 @@ public class Wall : MonoBehaviour, PlacedObject
         {
             //fixedPos.y = hit.point.y;
             // Debug.Log(hit.point.y);
-            fixedPos.y = hit.point.y;
+            worldpos.y = hit.point.y;
             
         }
-        else if(hit.collider.gameObject.tag != "Ground")
+        
+        // if you can't place, return false
+
+        return true;
+    }
+
+    private void OnMouseDown()
+    {
+        if(owner.myTurn)
         {
-            //fixedPos.y = hit.point.y;
+            ToggleSkillUi();
         }
+    }
 
-
-
-        //fixedPos.y = 0;
-        // TODO check for overlaps here
-
-        return fixedPos;
+    private void ToggleSkillUi()
+    {
+        if (skillsOpen == false)
+        {
+            skillsMenu.SetActive(true);
+            skillsMenu.GetComponent<SkillsAnimation>().openMenu();
+            skillsOpen = true;
+        }
+        else if (skillsOpen == true)
+        {
+            skillsMenu.GetComponent<SkillsAnimation>().closeMenu();
+            skillsOpen = false;
+        }
     }
 }
