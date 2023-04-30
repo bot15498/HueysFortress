@@ -47,6 +47,11 @@ public class FignerGunStoreSkill : MonoBehaviour
                 storeToPlace.EnableAbility();
                 isPlacing = false;
                 storeToPlace = null;
+
+                // also go and tell the player that there is a finger gun store.
+                FingerGunSkill fingerGunSkill = player.gameObject.GetComponentInChildren<FingerGunSkill>();
+                fingerGunSkill.store = storeToPlace;
+
                 skillInfo.endskillPreview(false);
             }
             else if (Input.GetMouseButtonDown(1))
@@ -65,5 +70,6 @@ public class FignerGunStoreSkill : MonoBehaviour
         player = combat.currentPlayer;
         GameObject storeObj = Instantiate(storePrefab, player.gameObject.transform);
         storeToPlace = storeObj.GetComponent<FingerGunStore>();
+        storeObj.layer = (int)player.physicsLayer;
     }
 }

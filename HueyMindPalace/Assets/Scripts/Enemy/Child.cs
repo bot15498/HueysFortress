@@ -81,11 +81,21 @@ public class Child : MonoBehaviour
         yield return new WaitForSeconds(1f);
         while (doingAction)
         {
-            if (false)
+            if (trainSkillInfo.CanUseSkill())
             {
                 // if train skill is available, use it.
+                trainSkill.StartSummonTrains();
+                Camera.main.GetComponent<CameraFollow>().FollowCursor();
+                wallSkillInfo.ActivateSkillPreview();
+                wallSkillInfo.endskillPreview(false);
+                yield return new WaitForSeconds(0.3f);
+                while (!trainSkill.isDone)
+                {
+                    yield return new WaitForSeconds(0.3f);
+                }
+                yield return new WaitForSeconds(5f);
             }
-            else if (walls.Select(x => x.turret != null).Count() < walls.Count)
+            else if (false)
             {
                 // if wall doesn't have a turret, build one if you have mp and off cooldown
             }

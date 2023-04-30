@@ -37,6 +37,7 @@ public class Rock : MonoBehaviour
             {
                 Fortress fort = colliderObj.GetComponent<Fortress>();
                 fort.owner.TakeDamage(damage);
+                fort.StartFlashRed();
             }
             Camera.main.GetComponent<CameraFollow>().FollowCursor();
             Destroy(this.gameObject);

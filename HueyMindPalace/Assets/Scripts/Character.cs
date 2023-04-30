@@ -44,13 +44,10 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (myTurn == true)
-        {
-            uimanager.updateManatext(maxMP,currMp);
-            
-            HealthText.text = currFortressHealth + "/" + maxFortressHealth;
-        }
-        
+        uimanager.updateManatext(maxMP, currMp);
+
+        HealthText.text = currFortressHealth + "/" + maxFortressHealth;
+
         healthBar.fillAmount = (float)currFortressHealth / maxFortressHealth;
         if(maxShieldHealth > 0)
         {
