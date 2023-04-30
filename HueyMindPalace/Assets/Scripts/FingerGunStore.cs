@@ -1,12 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FingerGunStore : MonoBehaviour, PlacedObject
 {
     public Character owner;
     public bool hasMultishot = false;
     public bool hasIncreaseDamage = false;
+    public int maxHealth = 2;
+    public int currHealth = 2;
+    public int maxShieldHealth = 0;
+    public int currshieldHealth = 0;
+
+    public TextMeshProUGUI HealthText;
+    public TextMeshProUGUI ShieldText;
+    public Image healthBar;
+    public Image ShieldBar;
+    public GameObject shieldobject;
+    public GameObject healthCanvas;
 
     private bool _isPlaced = false;
     private bool _lastPlaced = false;
@@ -52,6 +65,26 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
         isPlaced = true;
         box2d.enabled = true;
         sprite.color = new Color(1, 1, 1);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (currshieldHealth - damage > 0)
+        {
+            currshieldHealth -= damage;
+        }
+        else
+        {
+            currshieldHealth = 0;
+            maxShieldHealth = 0;
+            currHealth = Mathf.Max(currHealth - damage, 0);
+        }
+
+        if (currHealth == 0)
+        {
+            // KILL
+            Destroy(this.gameObject);
+        }
     }
 
     public void SetCanPlaceColor()

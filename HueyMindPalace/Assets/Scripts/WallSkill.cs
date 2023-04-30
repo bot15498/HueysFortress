@@ -64,6 +64,7 @@ public class WallSkill : MonoBehaviour
         isPlacing = true;
         player = combat.currentPlayer;
         GameObject wallObj = Instantiate(wallPrefab, player.gameObject.transform);
+        wallObj.layer = (int)player.physicsLayer;
         wallToPlace = wallObj.GetComponent<Wall>();
     }
 
@@ -74,6 +75,7 @@ public class WallSkill : MonoBehaviour
         player = combat.currentPlayer;
         GameObject wallObj = Instantiate(wallPrefab, player.gameObject.transform);
         wallToPlace = wallObj.GetComponent<Wall>();
+        wallObj.layer = (int)player.physicsLayer;
 
         bool validLocation = wallToPlace.GetValidLocation(ref location);
         // dangerou piece of code that just keeps trying to find a spot. 

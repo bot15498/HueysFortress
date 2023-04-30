@@ -10,4 +10,5 @@ public interface PlacedObject
     public void EnableAbility();
     public void DisableAbility();
     public bool GetValidLocation(ref Vector3 worldpos);
+    public void TakeDamage(int damage);
 }

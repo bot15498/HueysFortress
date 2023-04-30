@@ -71,6 +71,7 @@ public class LobRockSkill : MonoBehaviour
     private void Shoot(Vector3 diff, float velocity)
     {
         GameObject rock = Instantiate(rockPrefab, player.gameObject.transform);
+        rock.layer = (int)player.physicsLayer;
         Rigidbody2D rb2d = rock.GetComponent<Rigidbody2D>();
         rb2d.velocity = diff.normalized * velocity;
         Camera.main.GetComponent<CameraFollow>().SetTarget(rock.transform);

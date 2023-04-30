@@ -4,8 +4,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum PlayerPhysicsType
+{
+    Player1 = 7,
+    Player2 = 8
+}
+
 public class Character : MonoBehaviour
 {
+    public PlayerPhysicsType physicsLayer;
     public int maxFortressHealth = 5;
     public int currFortressHealth = 5;
     public int maxShieldHealth;
@@ -17,9 +24,9 @@ public class Character : MonoBehaviour
     public bool hasFortress = false;
     public CombatManager combatManager;
     public GameObject fortressPrefab;
+    public Fortress fort;
     public Vector2 fortressSpawnLocation;
     public bool isReady = true;
-    public List<PlacedObject> buildings = new List<PlacedObject>();
     UiManager uimanager;
     public TextMeshProUGUI HealthText;
     public TextMeshProUGUI ShieldText;
@@ -44,11 +51,11 @@ public class Character : MonoBehaviour
             HealthText.text = currFortressHealth + "/" + maxFortressHealth;
         }
         
-        healthBar.fillAmount = currFortressHealth / maxFortressHealth;
+        healthBar.fillAmount = (float)currFortressHealth / maxFortressHealth;
         if(maxShieldHealth > 0)
         {
             shieldobject.SetActive(true);
-            ShieldBar.fillAmount = maxShieldHealth / currshieldHealth;
+            ShieldBar.fillAmount = (float)maxShieldHealth / currshieldHealth;
             ShieldText.text = currshieldHealth + "/" + maxShieldHealth;
         } else
         {
@@ -56,11 +63,13 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void BuildFortress()
+    public GameObject BuildFortress()
     {
         // Builds the initial fortress.
-        Instantiate(fortressPrefab, fortressSpawnLocation, Quaternion.identity);
-        hasFortress = true;
+        GameObject fortObj = Instantiate(fortressPrefab, fortressSpawnLocation, Quaternion.identity);
+        fortObj.GetComponent<Fortress>().owner = this;
+        fort = fortObj.GetComponent<Fortress>();
+        return fortObj;
     }
 
     public void TurnReset()
@@ -89,6 +98,20 @@ public class Character : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currFortressHealth = Mathf.Max(currFortressHealth - damage, 0);
+        if(currshieldHealth - damage > 0)
+        {
+            currshieldHealth -= damage;
+        }
+        else
+        {
+            currshieldHealth = 0;
+            maxShieldHealth = 0;
+            currFortressHealth = Mathf.Max(currFortressHealth - damage, 0);
+        }
+
+        if (currFortressHealth == 0)
+        {
+            // YOU LOSE
+        }
     }
 }

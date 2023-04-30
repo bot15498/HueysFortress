@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rock : MonoBehaviour
+public class Dodgeball : MonoBehaviour
 {
-    public int damage = 2;
+    public int damage = 1;
     public Rigidbody2D rb2d;
+
+    // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -17,18 +19,16 @@ public class Rock : MonoBehaviour
         
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject colliderObj = collision.collider.gameObject;
-        //Debug.Log(collision.collider.gameObject.tag);
         if (colliderObj.tag == "Ground")
         {
-            Camera.main.GetComponent<CameraFollow>().FollowCursor();
             Destroy(this.gameObject);
         }
         if (colliderObj.tag == "Building")
         {
-            if(colliderObj.GetComponent<PlacedObject>() != null)
+            if (colliderObj.GetComponent<PlacedObject>() != null)
             {
                 PlacedObject obj = colliderObj.GetComponent<PlacedObject>();
                 obj.TakeDamage(damage);
@@ -38,7 +38,6 @@ public class Rock : MonoBehaviour
                 Fortress fort = colliderObj.GetComponent<Fortress>();
                 fort.owner.TakeDamage(damage);
             }
-            Camera.main.GetComponent<CameraFollow>().FollowCursor();
             Destroy(this.gameObject);
         }
     }

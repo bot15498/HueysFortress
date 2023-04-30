@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fortress : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Character owner;
     void Start()
     {
         
@@ -12,11 +12,6 @@ public class Fortress : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
-
-    public void OnCollisionEnter2D(Collision2D collision)
     {
         
     }

@@ -20,10 +20,15 @@ public class Child : MonoBehaviour
     public TrainSkill trainSkill;
     private SkillInfo trainSkillInfo;
     // shoot
+    public DodgeballSkill shootSkill;
+    public float shootSpeed = 5f;
+    private SkillInfo shootSkillInfo;
 
     private Character myChar;
     private CombatManager combat;
     private bool openedSkillsMenu = false;
+    [SerializeField]
+    private Fortress opponentFortress;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,11 +37,17 @@ public class Child : MonoBehaviour
 
         wallSkillInfo = wallSkill.GetComponent<SkillInfo>();
         trainSkillInfo = trainSkill.GetComponent<SkillInfo>();
+        shootSkillInfo = shootSkill.GetComponent<SkillInfo>();
+        opponentFortress = combat.player1.fort;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(opponentFortress == null)
+        {
+            opponentFortress = combat.player1.fort;
+        }
         if (!openedSkillsMenu)
         {
             skillsMenu.GetComponent<SkillsAnimation>().openMenu();
@@ -45,6 +56,17 @@ public class Child : MonoBehaviour
         // wait until it's my turn.
         if (myChar.isReady && myChar.myTurn && combat.currPhase == PhaseType.MainPhase && !isThinking)
         {
+            // in a very ugly fashion, check which walls are gone now.
+            List<Wall> newWalls = new List<Wall>();
+            foreach(Wall wall in walls)
+            {
+                if(wall != null)
+                {
+                    newWalls.Add(wall);
+                }
+            }
+            walls = newWalls;
+
             StartCoroutine(DoTurn());
             isThinking = true;
         }
@@ -95,7 +117,20 @@ public class Child : MonoBehaviour
             }
             else if (false)
             {
+                // fortify wall if you can.
+            }
+            else if (shootSkillInfo.CanUseSkill())
+            {
                 // shoot with child if you can.
+                GameObject ball =  shootSkill.Shoot(opponentFortress.gameObject.transform, shootSpeed);
+
+                // trigger the skill info stuff.
+                shootSkillInfo.ActivateSkillPreview();
+                shootSkillInfo.endskillPreview(false);
+
+                // Follow the ball
+                Camera.main.GetComponent<CameraFollow>().SetTarget(ball.transform);
+                yield return new WaitForSeconds(3f);
             }
             else
             {

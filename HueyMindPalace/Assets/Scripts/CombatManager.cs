@@ -45,7 +45,7 @@ public class CombatManager : MonoBehaviour
                 currentPlayer.TurnReset();
                 // wait some amount of time before moving on
                 timer += Time.deltaTime;
-                if (timer > 1f)
+                if (timer > 0.8f)
                 {
                     currPhase = PhaseType.MainPhase;
                     currentPlayer.myTurn = true;
@@ -58,15 +58,17 @@ public class CombatManager : MonoBehaviour
                 break;
             case PhaseType.FortressBuild:
                 // some animation triggering?
-                if(!player1.hasFortress)
+                if (player1.fort == null)
                 {
-                    player1.BuildFortress();
+                    GameObject fort = player1.BuildFortress();
+                    fort.layer = 7; // player 1 layer
                 }
-                if (!player2.hasFortress)
+                if (player2.fort == null)
                 {
-                    player2.BuildFortress();
+                    GameObject fort = player2.BuildFortress();
+                    fort.layer = 8; // player 2 layer
                 }
-                if(currentPlayer.isReady)
+                if (currentPlayer.isReady)
                 {
                     currPhase = PhaseType.MainPhase;
                 }
@@ -104,7 +106,7 @@ public class CombatManager : MonoBehaviour
 
     private void TickAllSkillInfo(Character player)
     {
-        foreach(SkillInfo skill in player.skillInfos)
+        foreach (SkillInfo skill in player.skillInfos)
         {
             skill.tickCooldown();
         }

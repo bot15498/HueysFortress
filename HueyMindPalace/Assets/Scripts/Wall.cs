@@ -19,7 +19,6 @@ public class Wall : MonoBehaviour, PlacedObject
     public Character owner;
     public GameObject skillsMenu;
 
-    UiManager uimanager;
     public TextMeshProUGUI HealthText;
     public TextMeshProUGUI ShieldText;
     public Image healthBar;
@@ -30,12 +29,10 @@ public class Wall : MonoBehaviour, PlacedObject
     private bool _isPlaced = false;
     private bool _lastPlaced = false;
     private PolygonCollider2D collider2d;
-    private BoxCollider2D validPlaceTrigger;
     private SpriteRenderer sprite;
     private CombatManager combat;
     private bool skillsOpen;
     private bool canPlaceColorControl = false;
-    private bool canPlace = true;
 
     public bool isPlaced { get => _isPlaced; set => _isPlaced=value; }
     public bool lastPlaced { get => _lastPlaced; set => _lastPlaced=value; }
@@ -60,11 +57,11 @@ public class Wall : MonoBehaviour, PlacedObject
     {
         HealthText.text = currHealth + "/" + maxHealth;
 
-        healthBar.fillAmount = currHealth / maxHealth;
+        healthBar.fillAmount = (float)currHealth / maxHealth;
         if (maxShieldHealth > 0)
         {
             shieldobject.SetActive(true);
-            ShieldBar.fillAmount = maxShieldHealth / currshieldHealth;
+            ShieldBar.fillAmount = (float)maxShieldHealth / currshieldHealth;
             ShieldText.text = currshieldHealth + "/" + maxShieldHealth;
         }
         else
@@ -88,6 +85,26 @@ public class Wall : MonoBehaviour, PlacedObject
         collider2d.enabled = true;
         sprite.color = new Color(1, 1, 1);
         healthCanvas.SetActive(true);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (currshieldHealth - damage > 0)
+        {
+            currshieldHealth -= damage;
+        }
+        else
+        {
+            currshieldHealth = 0;
+            maxShieldHealth = 0;
+            currHealth = Mathf.Max(currHealth - damage, 0);
+        }
+
+        if(currHealth == 0)
+        {
+            // KILL
+            Destroy(this.gameObject);
+        }
     }
 
     public void SetCanPlaceColor()

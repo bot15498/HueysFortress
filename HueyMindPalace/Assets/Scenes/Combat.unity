@@ -899,8 +899,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
+  m_sharedMaterial: {fileID: -2877279800843044413, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1397,8 +1397,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
+  m_sharedMaterial: {fileID: -2877279800843044413, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1993,6 +1993,7 @@ GameObject:
   - component: {fileID: 408386445}
   - component: {fileID: 408386444}
   - component: {fileID: 408386443}
+  - component: {fileID: 408386448}
   m_Layer: 5
   m_Name: Skill Icon (1)
   m_TagString: Untagged
@@ -2193,6 +2194,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408386441}
   m_CullTransparentMesh: 1
+--- !u!114 &408386448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408386441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d02474807968244b8b0641626885df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dodgeballPrefab: {fileID: 1009588421747952956, guid: 34a6ab260a9cf3a46ad7987ccc4aee1f, type: 3}
 --- !u!1 &423411545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4659,8 +4673,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
+  m_sharedMaterial: {fileID: -2877279800843044413, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4794,8 +4808,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
+  m_sharedMaterial: {fileID: -2877279800843044413, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5241,6 +5255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7955204b969bf324aa4a46c53c6c6d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicsLayer: 8
   maxFortressHealth: 5
   currFortressHealth: 5
   maxShieldHealth: 0
@@ -5252,6 +5267,7 @@ MonoBehaviour:
   hasFortress: 0
   combatManager: {fileID: 383572174}
   fortressPrefab: {fileID: 2885037681929275016, guid: b3da040d843dabc4ab4f8a8a9ac335bd, type: 3}
+  fort: {fileID: 0}
   fortressSpawnLocation: {x: 57.27107, y: 2.984606}
   isReady: 1
   HealthText: {fileID: 1754585544}
@@ -5293,6 +5309,9 @@ MonoBehaviour:
   minWallBuildDist: 10
   maxWallBuildDist: 20
   trainSkill: {fileID: 511201039}
+  shootSkill: {fileID: 408386448}
+  shootSpeed: 100
+  opponentFortress: {fileID: 0}
 --- !u!1 &961997404
 GameObject:
   m_ObjectHideFlags: 0
@@ -6449,8 +6468,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
+  m_sharedMaterial: {fileID: -2877279800843044413, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6789,8 +6808,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
+  m_sharedMaterial: {fileID: -2877279800843044413, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8067,8 +8086,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
+  m_sharedMaterial: {fileID: -2877279800843044413, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9445,6 +9464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7955204b969bf324aa4a46c53c6c6d22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicsLayer: 7
   maxFortressHealth: 5
   currFortressHealth: 5
   maxShieldHealth: 0
@@ -9456,6 +9476,7 @@ MonoBehaviour:
   hasFortress: 0
   combatManager: {fileID: 383572174}
   fortressPrefab: {fileID: 8767886669681032910, guid: a204b1795bc235c4e8b937581ec2a5f1, type: 3}
+  fort: {fileID: 0}
   fortressSpawnLocation: {x: -6.37, y: 1.26}
   isReady: 1
   HealthText: {fileID: 2141313911}
@@ -10412,8 +10433,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
+  m_sharedMaterial: {fileID: -2877279800843044413, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10876,8 +10897,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
+  m_sharedMaterial: {fileID: -2877279800843044413, guid: 3273b10cc1b33f54ea823db07a6a9d3f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
