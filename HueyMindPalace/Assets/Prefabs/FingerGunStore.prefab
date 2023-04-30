@@ -401,7 +401,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7557e3f2a5f3a7c42b922119a11b7e26, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7aa1bf434c15ab54399f45a44ad2446d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -507,10 +507,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8091198b1f8afe141af554deb5a2599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCooldown: 2
+  maxCooldown: 1
   currentCooldown: 0
   manaCost: 2
-  maxUses: 10
+  maxUses: 3
   currentUses: 0
   useText: {fileID: 9091857756075339103}
   CooldownText: {fileID: 7339734464026641826}
@@ -3228,7 +3228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7557e3f2a5f3a7c42b922119a11b7e26, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 87826f839fa083c4db9d34a84fac25e8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

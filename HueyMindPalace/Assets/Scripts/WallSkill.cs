@@ -12,10 +12,12 @@ public class WallSkill : MonoBehaviour
     private CombatManager combat;
     private Character player;
     private SkillInfo skillInfo;
+    private AudioManager am;
 
     void Start()
     {
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
+        am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
         skillInfo = GetComponent<SkillInfo>();
     }
 
@@ -43,6 +45,7 @@ public class WallSkill : MonoBehaviour
             if (validLocation && Input.GetMouseButtonDown(0))
             {
                 // left click, place ability. 
+                am.playclip(4, 0.5f);
                 wallToPlace.EnableAbility();
                 isPlacing = false;
                 wallToPlace = null;
@@ -51,6 +54,7 @@ public class WallSkill : MonoBehaviour
             else if (Input.GetMouseButtonDown(1))
             {
                 // right click, cancel placement
+                
                 skillInfo.endskillPreview(true);
                 Destroy(wallToPlace.gameObject);
                 wallToPlace = null;
