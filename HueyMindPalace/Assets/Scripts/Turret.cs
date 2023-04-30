@@ -139,6 +139,10 @@ public class Turret : MonoBehaviour, PlacedObject
             worldpos.y = hit.point.y;
 
         }
+        if (worldpos.x > -3.02f && worldpos.x < 0)
+        {
+            return false;
+        }
 
         // if you can't place, return false
 

@@ -133,6 +133,10 @@ public class Library : MonoBehaviour, PlacedObject
             worldpos.y = hit.point.y;
 
         }
+        if (worldpos.x > -3.02f && worldpos.x < 0)
+        {
+            return false;
+        }
 
         return true;
     }

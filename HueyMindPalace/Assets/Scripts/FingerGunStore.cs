@@ -135,7 +135,7 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
             worldpos.y = hit.point.y;
 
         }
-        else if (hit.collider.gameObject.tag != "Building")
+        if (worldpos.x > -3.02f && worldpos.x < 0)
         {
             return false;
         }
