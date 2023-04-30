@@ -62,8 +62,8 @@ public class FingerGunSkill : MonoBehaviour
                 if (store != null && store.hasReduceCooldown)
                 {
                     // Tick down cooldown twice. 
-                    skillInfo.maxCooldown /= 2;
-                    skillInfo.currentCooldown /= 2;
+                    skillInfo.maxCooldown = Mathf.Floor(skillInfo.maxCooldown/ 2);
+                    skillInfo.currentCooldown = Mathf.Floor(skillInfo.currentCooldown / 2);
                 }
 
                 isAiming = false;

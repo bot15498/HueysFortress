@@ -2852,10 +2852,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8091198b1f8afe141af554deb5a2599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCooldown: 2
+  maxCooldown: 3
   currentCooldown: 0
   manaCost: 2
-  maxUses: 10
+  maxUses: 3
   currentUses: 0
   useText: {fileID: 1158688754}
   CooldownText: {fileID: 238018010}
@@ -10779,10 +10779,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8091198b1f8afe141af554deb5a2599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCooldown: 2
+  maxCooldown: 1
   currentCooldown: 0
-  manaCost: 2
-  maxUses: 10
+  manaCost: 4
+  maxUses: 15
   currentUses: 0
   useText: {fileID: 1559101218}
   CooldownText: {fileID: 1503421210}
