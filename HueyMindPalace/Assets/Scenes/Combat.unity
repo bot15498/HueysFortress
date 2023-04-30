@@ -2169,6 +2169,7 @@ MonoBehaviour:
   manaToolTip: {fileID: 868070583}
   TitleText: {fileID: 1985610569}
   ManaFill: {fileID: 800734093}
+  manAnimation: {fileID: 1598857130}
 --- !u!114 &383572177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3659,7 +3660,7 @@ GameObject:
   - component: {fileID: 543125481}
   - component: {fileID: 543125482}
   m_Layer: 5
-  m_Name: Skill Icon
+  m_Name: Wall Skill Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3766,9 +3767,10 @@ MonoBehaviour:
   infiniteUses: 0
   SkillIcon: {fileID: 21300000, guid: 5e46b62bffdd28149bdac4e01c3300a0, type: 3}
   skilliconObject: {fileID: 426508024}
-  Title: SUMMON WALL
+  Title: Summon Mind Wall
   Manatext: {fileID: 1121182826}
-  ToolTip: build coolio wall
+  ToolTip: "Build a brick wall that blocks things. Has 2 Health. \n\nWall has a fortify
+    and sacrifice ability"
 --- !u!114 &543125480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4111,7 +4113,7 @@ GameObject:
   - component: {fileID: 575504657}
   - component: {fileID: 575504656}
   m_Layer: 5
-  m_Name: Skill Icon (6)
+  m_Name: Library Skill Icon (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4295,7 +4297,7 @@ MonoBehaviour:
   infiniteUses: 0
   SkillIcon: {fileID: 21300000, guid: 5e46b62bffdd28149bdac4e01c3300a0, type: 3}
   skilliconObject: {fileID: 798229632}
-  Title: LIBRARY
+  Title: Big Brain LIBRARY
   Manatext: {fileID: 1211584025}
   ToolTip: 'Builds the repository for all knowledge.
 
@@ -6354,7 +6356,7 @@ GameObject:
   - component: {fileID: 841057406}
   - component: {fileID: 841057405}
   m_Layer: 5
-  m_Name: Skill Icon (2)
+  m_Name: Store Skill Icon (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6540,7 +6542,7 @@ MonoBehaviour:
   skilliconObject: {fileID: 830873194}
   Title: FINGER GUN STORE
   Manatext: {fileID: 1358135724}
-  ToolTip: Builds the finger based arms store.
+  ToolTip: Builds the finger gun store. Gives upgrades to finger gun.
 --- !u!114 &841057409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9658,7 +9660,7 @@ GameObject:
   - component: {fileID: 1342041332}
   - component: {fileID: 1342041337}
   m_Layer: 5
-  m_Name: Skill Icon (1)
+  m_Name: Rock Skill Icon (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9828,9 +9830,9 @@ MonoBehaviour:
   infiniteUses: 0
   SkillIcon: {fileID: 21300000, guid: 5e46b62bffdd28149bdac4e01c3300a0, type: 3}
   skilliconObject: {fileID: 1975764467}
-  Title: LOB ROCK
+  Title: ROCk
   Manatext: {fileID: 732103879}
-  ToolTip: Lobs a rock.
+  ToolTip: 'throw rock. rock hurt for 2 '
 --- !u!114 &1342041335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13735,7 +13737,7 @@ GameObject:
   - component: {fileID: 1884606260}
   - component: {fileID: 1884606265}
   m_Layer: 5
-  m_Name: Skill Icon (4)
+  m_Name: Finger Skill Icon (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13907,7 +13909,7 @@ MonoBehaviour:
   skilliconObject: {fileID: 1097457149}
   Title: FINGER GUN
   Manatext: {fileID: 847293428}
-  ToolTip: point
+  ToolTip: Aim and shoot your fingers off dealing a base of 1 damage(can be upgraded)
 --- !u!114 &1884606263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14911,7 +14913,7 @@ GameObject:
   - component: {fileID: 2007694839}
   - component: {fileID: 2007694844}
   m_Layer: 5
-  m_Name: Skill Icon (3)
+  m_Name: Turret Skill Icon (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15081,9 +15083,10 @@ MonoBehaviour:
   infiniteUses: 0
   SkillIcon: {fileID: 21300000, guid: 5e46b62bffdd28149bdac4e01c3300a0, type: 3}
   skilliconObject: {fileID: 1104733099}
-  Title: BUILD TURRET
+  Title: The Throwing Wall
   Manatext: {fileID: 1001468689}
-  ToolTip: Build structure capable of finger gunning on another level.
+  ToolTip: Build structure capable of making rock flingers. Rock flingers can attack
+    with the attack ability on this building.
 --- !u!114 &2007694842
 MonoBehaviour:
   m_ObjectHideFlags: 0

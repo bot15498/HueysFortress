@@ -380,7 +380,6 @@ MonoBehaviour:
   currHealth: 2
   maxShieldHealth: 0
   currshieldHealth: 0
-  turret: {fileID: 0}
   owner: {fileID: 0}
   skillsMenu: {fileID: 4658461754743427612}
   HealthText: {fileID: 4494536177871921542}
@@ -1597,7 +1596,7 @@ MonoBehaviour:
   skilliconObject: {fileID: 8395351788096884453}
   Title: SACRIFICE WALL
   Manatext: {fileID: 2583229277762771748}
-  ToolTip: Turns wall health into fortress shield.
+  ToolTip: Destroys wall and give fortress 2 armor
 --- !u!114 &456300899720525096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2675,7 +2674,7 @@ MonoBehaviour:
   skilliconObject: {fileID: 2086239171719930479}
   Title: FORTIFY WALL
   Manatext: {fileID: 2541603605171120949}
-  ToolTip: Adds shield to wall.
+  ToolTip: Grants wall 2 Armor points on use.
 --- !u!114 &800255691256787001
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI TitleText;
     public Image ManaFill;
     Color iconColor;
+    public Animator manAnimation;
 
 
     // Start is called before the first frame update
