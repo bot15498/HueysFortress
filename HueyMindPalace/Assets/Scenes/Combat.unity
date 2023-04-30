@@ -7803,8 +7803,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physicsLayer: 8
-  maxFortressHealth: 23
-  currFortressHealth: 23
+  maxFortressHealth: 16
+  currFortressHealth: 16
   maxShieldHealth: 0
   currshieldHealth: 0
   maxMP: 3
