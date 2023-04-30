@@ -67,6 +67,7 @@ public class OldMan : MonoBehaviour
                 fort.StartFlashRed();
             }
             Camera.main.GetComponent<CameraFollow>().FollowCursor();
+            am.playclip(8, 0.5f);
             Destroy(this.gameObject);
         }
     }
