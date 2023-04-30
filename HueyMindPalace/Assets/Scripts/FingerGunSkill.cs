@@ -59,11 +59,11 @@ public class FingerGunSkill : MonoBehaviour
                 Shoot(bulletPrefab, diff);
                 skillInfo.endskillPreview(false);
                 predictPath.positionCount = 0;
-                if (store != null && store.hasReduceCooldown)
+                if (store != null)
                 {
                     // Tick down cooldown twice. 
-                    skillInfo.maxCooldown = Mathf.Clamp(skillInfo.maxCooldown - 1, 0, 9999);
-                    skillInfo.currentCooldown = Mathf.Clamp(skillInfo.currentCooldown - 1, 0, 9999);
+                    skillInfo.maxCooldown = Mathf.Clamp(skillInfo.maxCooldown - store.cooldownReduction, 0, 9999);
+                    skillInfo.currentCooldown = Mathf.Clamp(skillInfo.currentCooldown - store.cooldownReduction, 0, 9999);
                 }
 
                 isAiming = false;

@@ -9,7 +9,7 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
     public Character owner;
     public bool hasMultishot = false;
     public int damageIncrease = 0;
-    public bool hasReduceCooldown = false;
+    public int cooldownReduction = 0;
     public int maxHealth = 2;
     public int currHealth = 2;
     public int maxShieldHealth = 0;

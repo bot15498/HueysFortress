@@ -38,7 +38,7 @@ public class FingerGunStoreEnhanceSkill : MonoBehaviour
 
     public void BuyReduceCooldown()
     {
-        store.hasReduceCooldown = true;
+        store.cooldownReduction += 1;
         skillInfo.endskillPreview(false);
     }
 }
