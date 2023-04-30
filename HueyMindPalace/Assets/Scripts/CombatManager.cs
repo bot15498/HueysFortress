@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum PhaseType
 {
@@ -136,6 +137,7 @@ public class CombatManager : MonoBehaviour
     {
         Camera.main.GetComponent<CameraFollow>().SetTarget(player1.transform);
         mananimation.Play("ManWin");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

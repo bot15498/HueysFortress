@@ -34,20 +34,24 @@ public class OldMan : MonoBehaviour
     {
         if(combat.currentPlayer != owner && combat.currPhase == PhaseType.MainPhase)
         {
-            rb2d.velocity = Vector3.left;
+            rb2d.velocity = Vector3.left * moveSpeed;
+        }
+        else
+        {
+            rb2d.velocity = Vector3.left * 0;
+        }
 
-            // slowly move towards opponent. 
-            Vector3 pos = transform.position;
-            int groundmask = 1 << 6;
-            Vector3 dir = (new Vector3(0, -1, 0));
-            RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 10, 0), dir, Mathf.Infinity, groundmask);
-            if (hit.collider.gameObject.tag == "Ground")
-            {
-                //fixedPos.y = hit.point.y;
-                // Debug.Log(hit.point.y);
-                pos.y = hit.point.y;
-                transform.position = pos;
-            }
+        // slowly move towards opponent. 
+        Vector3 pos = transform.position;
+        int groundmask = 1 << 6;
+        Vector3 dir = (new Vector3(0, -1, 0));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 10, 0), dir, Mathf.Infinity, groundmask);
+        if (hit.collider.gameObject.tag == "Ground")
+        {
+            //fixedPos.y = hit.point.y;
+            // Debug.Log(hit.point.y);
+            pos.y = hit.point.y;
+            transform.position = pos;
         }
     }
 

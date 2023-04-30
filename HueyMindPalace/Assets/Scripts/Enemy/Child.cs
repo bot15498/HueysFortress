@@ -23,6 +23,12 @@ public class Child : MonoBehaviour
     public DodgeballSkill shootSkill;
     public float shootSpeed = 5f;
     private SkillInfo shootSkillInfo;
+    // old man
+    public OldManSkill oldManSkill;
+    public float oldManSpeed = 5f;
+    public float minOldManBuildDist = 5f;
+    public float maxOldManBuildDist = 10f;
+    private SkillInfo oldManSkillInfo;
 
     private Character myChar;
     private CombatManager combat;
@@ -38,6 +44,7 @@ public class Child : MonoBehaviour
         wallSkillInfo = wallSkill.GetComponent<SkillInfo>();
         trainSkillInfo = trainSkill.GetComponent<SkillInfo>();
         shootSkillInfo = shootSkill.GetComponent<SkillInfo>();
+        oldManSkillInfo = oldManSkill.GetComponent<SkillInfo>();
         opponentFortress = combat.player1.fort;
     }
 
@@ -95,9 +102,23 @@ public class Child : MonoBehaviour
                 }
                 yield return new WaitForSeconds(5f);
             }
-            else if (false)
+            else if (oldManSkillInfo.CanUseSkill())
             {
-                // if wall doesn't have a turret, build one if you have mp and off cooldown
+                // send out an old man if you can. 
+                float xdiff = Random.Range(minOldManBuildDist, maxOldManBuildDist);
+                Vector3 buildpos = transform.position;
+                buildpos.x -= xdiff;
+
+                // palce the old man
+                OldMan oldMan = oldManSkill.PlaceOldMan(buildpos);
+                Camera.main.GetComponent<CameraFollow>().SetTarget(oldMan.transform);
+
+                // trigger the skill info stuff.
+                oldManSkillInfo.ActivateSkillPreview();
+                oldManSkillInfo.endskillPreview(false);
+
+                // wait a little bit
+                yield return new WaitForSeconds(1f);
             }
             else if (!placedWallThisTurn && walls.Count < maxWalls && wallSkillInfo.CanUseSkill())
             {
@@ -132,6 +153,10 @@ public class Child : MonoBehaviour
             else if (shootSkillInfo.CanUseSkill())
             {
                 // shoot with child if you can.
+                // home in on the kid before you do anything
+                Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
+                yield return new WaitForSeconds(1f);
+
                 GameObject ball =  shootSkill.Shoot(opponentFortress.gameObject.transform, shootSpeed);
 
                 // trigger the skill info stuff.
