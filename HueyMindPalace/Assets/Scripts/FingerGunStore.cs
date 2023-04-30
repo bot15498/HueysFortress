@@ -51,9 +51,21 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        HealthText.text = currHealth + "/" + maxHealth;
+
+        healthBar.fillAmount = (float)currHealth / maxHealth;
+        if (maxShieldHealth > 0)
+        {
+            shieldobject.SetActive(true);
+            ShieldBar.fillAmount = (float)maxShieldHealth / currshieldHealth;
+            ShieldText.text = currshieldHealth + "/" + maxShieldHealth;
+        }
+        else
+        {
+            shieldobject.SetActive(false);
+        }
     }
 
 

@@ -6,11 +6,13 @@ public class Dodgeball : MonoBehaviour
 {
     public int damage = 1;
     public Rigidbody2D rb2d;
+    private AudioManager am;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
