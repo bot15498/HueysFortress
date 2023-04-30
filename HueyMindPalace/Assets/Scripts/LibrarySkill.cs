@@ -64,6 +64,7 @@ public class LibrarySkill : MonoBehaviour
         isPlacing = true;
         player = combat.currentPlayer;
         GameObject wallObj = Instantiate(libraryPrefab, player.gameObject.transform);
+        wallObj.layer = (int)player.physicsLayer;
         libraryToPlace = wallObj.GetComponent<Library>();
     }
 }
