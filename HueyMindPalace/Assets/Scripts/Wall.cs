@@ -15,7 +15,6 @@ public class Wall : MonoBehaviour, PlacedObject
     public int currHealth = 2;
     public int maxShieldHealth = 0;
     public int currshieldHealth = 0;
-    public Turret turret;
     public Character owner;
     public GameObject skillsMenu;
 

@@ -8,11 +8,13 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
 {
     public Character owner;
     public bool hasMultishot = false;
-    public bool hasIncreaseDamage = false;
+    public int damageIncrease = 0;
+    public bool hasReduceCooldown = false;
     public int maxHealth = 2;
     public int currHealth = 2;
     public int maxShieldHealth = 0;
     public int currshieldHealth = 0;
+    public GameObject skillsMenu;
 
     public TextMeshProUGUI HealthText;
     public TextMeshProUGUI ShieldText;
@@ -26,6 +28,7 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
     private BoxCollider2D box2d;
     private SpriteRenderer sprite;
     private CombatManager combat;
+    private bool skillsOpen = false;
 
     public bool isPlaced { get => _isPlaced; set => _isPlaced = value; }
     public bool lastPlaced { get => _lastPlaced; set => _lastPlaced = value; }
@@ -58,6 +61,7 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
         isPlaced = false;
         box2d.enabled = false;
         SetCanPlaceColor();
+        healthCanvas.SetActive(false);
     }
 
     public void EnableAbility()
@@ -65,6 +69,7 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
         isPlaced = true;
         box2d.enabled = true;
         sprite.color = new Color(1, 1, 1);
+        healthCanvas.SetActive(true);
     }
 
     public void TakeDamage(int damage)
@@ -89,12 +94,18 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
 
     public void SetCanPlaceColor()
     {
-        sprite.color = new Color(0, 1, 0);
+        if (sprite != null)
+        {
+            sprite.color = new Color(0, 1, 0);
+        }
     }
 
     public void SetNoPlaceColor()
     {
-        sprite.color = new Color(1, 0, 0);
+        if (sprite != null)
+        {
+            sprite.color = new Color(1, 0, 0);
+        }
     }
 
     public bool GetValidLocation(ref Vector3 worldpos)
@@ -115,5 +126,28 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
             return false;
         }
         return true;
+    }
+
+    private void OnMouseDown()
+    {
+        if (owner.myTurn)
+        {
+            ToggleSkillUi();
+        }
+    }
+
+    private void ToggleSkillUi()
+    {
+        if (skillsOpen == false)
+        {
+            skillsMenu.SetActive(true);
+            skillsMenu.GetComponent<SkillsAnimation>().openMenu();
+            skillsOpen = true;
+        }
+        else if (skillsOpen == true)
+        {
+            skillsMenu.GetComponent<SkillsAnimation>().closeMenu();
+            skillsOpen = false;
+        }
     }
 }

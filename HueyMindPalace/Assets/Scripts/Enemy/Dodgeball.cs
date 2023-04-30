@@ -25,6 +25,7 @@ public class Dodgeball : MonoBehaviour
         if (colliderObj.tag == "Ground")
         {
             Destroy(this.gameObject);
+            Camera.main.GetComponent<CameraFollow>().FollowCursor();
         }
         if (colliderObj.tag == "Building")
         {
@@ -37,8 +38,10 @@ public class Dodgeball : MonoBehaviour
             {
                 Fortress fort = colliderObj.GetComponent<Fortress>();
                 fort.owner.TakeDamage(damage);
+                fort.StartFlashRed();
             }
             Destroy(this.gameObject);
+            Camera.main.GetComponent<CameraFollow>().FollowCursor();
         }
     }
 }

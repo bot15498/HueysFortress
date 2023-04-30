@@ -27,10 +27,18 @@ public class FingerGunStoreEnhanceSkill : MonoBehaviour
     public void BuyMultishot()
     {
         store.hasMultishot = true;
+        skillInfo.endskillPreview(false);
     }
 
     public void BuyIncreaseDamage()
     {
-        store.hasIncreaseDamage = true;
+        store.damageIncrease += 1;
+        skillInfo.endskillPreview(false);
+    }
+
+    public void BuyReduceCooldown()
+    {
+        store.hasReduceCooldown = true;
+        skillInfo.endskillPreview(false);
     }
 }
