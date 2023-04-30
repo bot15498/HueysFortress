@@ -21,6 +21,6 @@ public class AudioManager : MonoBehaviour
     public void playclip(int clipid,float volume)
     {
         AudioSource.PlayClipAtPoint(soundclips[clipid], gameObject.transform.position,volume);
-        Debug.Log("asdujfghbajkdfghasdjkhfgasjkdghfkasdujhgf");
+       
     }
 }

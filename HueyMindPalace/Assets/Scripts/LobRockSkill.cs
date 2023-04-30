@@ -13,12 +13,14 @@ public class LobRockSkill : MonoBehaviour
     private CombatManager combat;
     private Character player;
     private SkillInfo skillInfo;
+    private AudioManager am;
 
     // Start is called before the first frame update
     void Start()
     {
         skillInfo = GetComponent<SkillInfo>();
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
+        am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -47,6 +49,7 @@ public class LobRockSkill : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 // left click, shoot
+                am.playclip(2, 0.5f);
                 Shoot(diff, maxForceScale * diff.y);
                 skillInfo.endskillPreview(false);
                 predictPath.positionCount = 0;

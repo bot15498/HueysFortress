@@ -29,6 +29,7 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
     private SpriteRenderer sprite;
     private CombatManager combat;
     private bool skillsOpen = false;
+    AudioManager am;
 
     public bool isPlaced { get => _isPlaced; set => _isPlaced = value; }
     public bool lastPlaced { get => _lastPlaced; set => _lastPlaced = value; }
@@ -38,6 +39,7 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
     {
         box2d = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
+        am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
         LayerMask groundmask = LayerMask.GetMask("Ground");
         DisableAbility();
         if (combat == null)
@@ -133,6 +135,7 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
         if (owner.myTurn)
         {
             ToggleSkillUi();
+            am.playclip(5, 0.25f);
         }
     }
 

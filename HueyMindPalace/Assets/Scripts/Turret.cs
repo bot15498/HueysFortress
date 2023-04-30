@@ -31,6 +31,7 @@ public class Turret : MonoBehaviour, PlacedObject
     private SpriteRenderer sprite;
     private CombatManager combat;
     private bool skillsOpen;
+    AudioManager am;
 
     public bool isPlaced { get => _isPlaced; set => _isPlaced = value; }
     public bool lastPlaced { get => _lastPlaced; set => _lastPlaced = value; }
@@ -40,6 +41,7 @@ public class Turret : MonoBehaviour, PlacedObject
         collider2d = GetComponent<PolygonCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         LayerMask groundmask = LayerMask.GetMask("Ground");
+        am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
         DisableAbility();
         if (combat == null)
         {
@@ -148,6 +150,7 @@ public class Turret : MonoBehaviour, PlacedObject
         if (owner.myTurn)
         {
             ToggleSkillUi();
+            am.playclip(5, 0.25f);
         }
     }
 

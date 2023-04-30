@@ -12,11 +12,13 @@ public class TurretSkill : MonoBehaviour
     private CombatManager combat;
     private Character player;
     private SkillInfo skillInfo;
+    AudioManager am;
 
     // Start is called before the first frame update
     void Start()
     {
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
+        am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
         skillInfo = GetComponent<SkillInfo>();
     }
 
@@ -44,6 +46,7 @@ public class TurretSkill : MonoBehaviour
             if (validLocation && Input.GetMouseButtonDown(0))
             {
                 // left click, place ability. 
+                am.playclip(4, 0.5f);
                 turretToPlace.EnableAbility();
                 isPlacing = false;
                 turretToPlace = null;

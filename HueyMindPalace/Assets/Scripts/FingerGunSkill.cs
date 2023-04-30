@@ -15,12 +15,14 @@ public class FingerGunSkill : MonoBehaviour
     private CombatManager combat;
     private Character player;
     private SkillInfo skillInfo;
+    AudioManager am;
 
     // Start is called before the first frame update
     void Start()
     {
         skillInfo = GetComponent<SkillInfo>();
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
+        am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,8 @@ public class FingerGunSkill : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 // left click, shoot
+
+                am.playclip(0, 0.5f);
                 Shoot(bulletPrefab, diff);
                 skillInfo.endskillPreview(false);
                 predictPath.positionCount = 0;

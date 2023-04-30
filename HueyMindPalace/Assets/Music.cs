@@ -4,23 +4,41 @@ using UnityEngine;
 
 public class Music : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField]
-    public AudioClip soundclips;
-    void Start()
+    private static Music _instance;
+
+    public static Music Instance
     {
-        DontDestroyOnLoad(transform.gameObject);
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<Music>();
+
+                if (_instance == null)
+                {
+                    GameObject singleton = new GameObject();
+                    _instance = singleton.AddComponent<Music>();
+                    singleton.name = typeof(Music).ToString();
+                    DontDestroyOnLoad(singleton);
+                }
+            }
+
+            return _instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 
-    public void playclip(int clipid)
-    {
-        AudioSource.PlayClipAtPoint(soundclips, gameObject.transform.position);
-    }
 }

@@ -11,11 +11,13 @@ public class PlayableCharacter : MonoBehaviour
     private CombatManager combat;
     private bool enableFollow = false;
     private bool skillsOpen = false;
+    AudioManager am;
     // Start is called before the first frame update
     void Start()
     {
         myChar = GetComponent<Character>();
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
+        am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -36,7 +38,9 @@ public class PlayableCharacter : MonoBehaviour
     {
         if(myChar.myTurn)
         {
+
             ToggleSkillUi();
+            am.playclip(5, 0.25f);
         }
     }
 
