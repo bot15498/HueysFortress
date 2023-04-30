@@ -71,6 +71,8 @@ public class FingerGunSkill : MonoBehaviour
             else if (Input.GetMouseButtonDown(1))
             {
                 // right click, cancel placement
+                gunarm.SetActive(false);
+                mananimation.Play("ManIsIdle");
                 skillInfo.endskillPreview(true);
                 predictPath.positionCount = 0;
                 isAiming = false;

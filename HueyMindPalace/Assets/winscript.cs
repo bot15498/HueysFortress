@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class winscript : MonoBehaviour
 {
@@ -14,5 +15,16 @@ public class winscript : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+    public void quitgame()
+    {
+        Application.Quit();
+    }
+
+    public void mainmenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
