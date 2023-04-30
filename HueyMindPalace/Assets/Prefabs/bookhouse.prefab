@@ -32,8 +32,8 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 4335159733023033988}
   - {fileID: 6505423200163502863}
+  - {fileID: 4335159733023033988}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -127,13 +127,13 @@ MonoBehaviour:
   currHealth: 2
   maxShieldHealth: 0
   currshieldHealth: 0
-  HealthText: {fileID: 0}
-  ShieldText: {fileID: 0}
-  healthBar: {fileID: 0}
-  ShieldBar: {fileID: 0}
-  shieldobject: {fileID: 0}
-  healthCanvas: {fileID: 0}
-  skillsMenu: {fileID: 0}
+  HealthText: {fileID: 26172970437468889}
+  ShieldText: {fileID: 6287408928900664231}
+  healthBar: {fileID: 5426649448943988407}
+  ShieldBar: {fileID: 5833453070518527732}
+  shieldobject: {fileID: 5267261064560048890}
+  healthCanvas: {fileID: 2518099823087385758}
+  skillsMenu: {fileID: 1037670556044100978}
 --- !u!60 &4709583828134780795
 PolygonCollider2D:
   m_ObjectHideFlags: 0
