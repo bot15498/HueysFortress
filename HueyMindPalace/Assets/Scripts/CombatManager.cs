@@ -9,7 +9,9 @@ public enum PhaseType
     MainPhase,
     ActionPhase,
     EndPhase,
-    NoPhase
+    NoPhase,
+    Player1Wins,
+    Player2Wins
 }
 
 public class CombatManager : MonoBehaviour
@@ -78,6 +80,14 @@ public class CombatManager : MonoBehaviour
                 {
                     currPhase = PhaseType.ActionPhase;
                 }
+                if(player1.currFortressHealth <= 0)
+                {
+                    currPhase = PhaseType.Player2Wins;
+                }
+                if (player2.currFortressHealth <= 0)
+                {
+                    currPhase = PhaseType.Player1Wins;
+                }
                 break;
             case PhaseType.ActionPhase:
                 currPhase = PhaseType.EndPhase;
@@ -101,6 +111,14 @@ public class CombatManager : MonoBehaviour
                 // If this happens something bad happeneed. 
                 currPhase = PhaseType.TurnStart;
                 break;
+            case PhaseType.Player1Wins:
+                Camera.main.GetComponent<CameraFollow>().SetTarget(player1.transform);
+                StartCoroutine(TransitionToWinnerScene());
+                break;
+            case PhaseType.Player2Wins:
+                Camera.main.GetComponent<CameraFollow>().SetTarget(player2.transform);
+                StartCoroutine(TransitionToWinnerScene());
+                break;
         }
     }
 
@@ -110,5 +128,11 @@ public class CombatManager : MonoBehaviour
         {
             skill.tickCooldown();
         }
+    }
+
+    private IEnumerator TransitionToWinnerScene()
+    {
+
+        yield return new WaitForSeconds(2f);
     }
 }
