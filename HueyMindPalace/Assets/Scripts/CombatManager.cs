@@ -21,6 +21,7 @@ public class CombatManager : MonoBehaviour
     public Character currentPlayer;
     public PhaseType currPhase = PhaseType.NoPhase;
     public int turnNumber = 1;
+    Animator mananimation;
 
     private float timer = 0f;
 
@@ -30,6 +31,7 @@ public class CombatManager : MonoBehaviour
         // Just move on and set player 1 to go first for now.
         currPhase = PhaseType.TurnStart;
         currentPlayer = player1;
+        mananimation = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UiManager>().manAnimation;
     }
 
     void Update()
@@ -132,7 +134,8 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator TransitionToWinnerScene()
     {
-
+        Camera.main.GetComponent<CameraFollow>().SetTarget(player1.transform);
+        mananimation.Play("ManWin");
         yield return new WaitForSeconds(2f);
     }
 }

@@ -15,7 +15,9 @@ public class FingerGunSkill : MonoBehaviour
     private CombatManager combat;
     private Character player;
     private SkillInfo skillInfo;
+    public GameObject gunarm;
     AudioManager am;
+    Animator mananimation;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,7 @@ public class FingerGunSkill : MonoBehaviour
         skillInfo = GetComponent<SkillInfo>();
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
         am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
+        mananimation = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UiManager>().manAnimation;
     }
 
     // Update is called once per frame
@@ -39,14 +42,14 @@ public class FingerGunSkill : MonoBehaviour
 
             // draw path
             Vector3 diff = worldMousePos - player.gameObject.transform.position;
-            Vector2[] trajectory = PredictPath(bulletPrefab, speed, diff, player.gameObject.transform.position, numLinePoints);
+            /*Vector2[] trajectory = PredictPath(bulletPrefab, speed, diff, player.gameObject.transform.position, numLinePoints);
             predictPath.positionCount = trajectory.Length;
             Vector3[] trajectory3d = new Vector3[trajectory.Length];
             for (int i = 0; i < trajectory.Length; i++)
             {
                 trajectory3d[i] = trajectory[i];
             }
-            predictPath.SetPositions(trajectory3d);
+            predictPath.SetPositions(trajectory3d);*/
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -78,6 +81,8 @@ public class FingerGunSkill : MonoBehaviour
     public void PreviewShoot()
     {
         player = combat.currentPlayer;
+        mananimation.Play("ManGun");
+        gunarm.SetActive(true);
         isAiming = true;
     }
 
@@ -94,7 +99,8 @@ public class FingerGunSkill : MonoBehaviour
         bullet.layer = (int)player.physicsLayer;
         rb2d.velocity = mousepos.normalized * speed;
         // follow bullet until it hits something.
-
+        gunarm.SetActive(false);
+        mananimation.Play("ManIsIdle");
         // check damage
         Dodgeball finger = bullet.GetComponent<Dodgeball>();
         if(store != null)
