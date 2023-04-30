@@ -92,8 +92,9 @@ public class SkillInfo : MonoBehaviour
             CooldownText.text = currentCooldown.ToString();
         }
 
-        if (currentCooldown == 0)
+        if (currentCooldown <= 0)
         {
+            currentCooldown = 0;
             onCooldown = false;
             cooldownObject.SetActive(false);
             currentCooldown = maxCooldown;
