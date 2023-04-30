@@ -19,6 +19,7 @@ public class OldMan : MonoBehaviour
     {
         collider2d = GetComponent<PolygonCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
+        rb2d = GetComponent<Rigidbody2D>();
         LayerMask groundmask = LayerMask.GetMask("Ground");
         am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
         if (combat == null)

@@ -28,8 +28,10 @@ public class OldManSkill : MonoBehaviour
 
     public OldMan PlaceOldMan(Vector3 location)
     {
+        player = combat.currentPlayer;
         GameObject oldManObj = Instantiate(oldManPrefab, transform.position, Quaternion.identity);
         oldManObj.transform.position = location;
+        oldManObj.layer = (int)player.physicsLayer;
         return oldManObj.GetComponent<OldMan>();
     }
 }
