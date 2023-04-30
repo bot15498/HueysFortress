@@ -1582,9 +1582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8091198b1f8afe141af554deb5a2599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCooldown: 4
+  maxCooldown: 1
   currentCooldown: 0
-  manaCost: 2
+  manaCost: 3
   maxUses: 10
   currentUses: 0
   useText: {fileID: 2858819173372995162}

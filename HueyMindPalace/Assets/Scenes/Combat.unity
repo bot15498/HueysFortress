@@ -2624,9 +2624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8091198b1f8afe141af554deb5a2599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCooldown: 2
+  maxCooldown: 1
   currentCooldown: 0
-  manaCost: 1
+  manaCost: 2
   maxUses: 10
   currentUses: 0
   useText: {fileID: 818838514}
@@ -2648,7 +2648,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   playercharacter: {fileID: 894620504}
-  infiniteUses: 0
+  infiniteUses: 1
   SkillIcon: {fileID: 21300000, guid: 5e46b62bffdd28149bdac4e01c3300a0, type: 3}
   skilliconObject: {fileID: 426081285}
   Title: DODGEBALL
@@ -2881,7 +2881,7 @@ MonoBehaviour:
   skilliconObject: {fileID: 1770880687}
   Title: SUMMON WALL
   Manatext: {fileID: 1772921162}
-  ToolTip: builds coolio wall.
+  ToolTip: Build a brick wall that blocks things. Has 3 Health.
 --- !u!114 &423411551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3679,8 +3679,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxCooldown: 6
   currentCooldown: 0
-  manaCost: 6
-  maxUses: 2
+  manaCost: 7
+  maxUses: 3
   currentUses: 0
   useText: {fileID: 1211443223}
   CooldownText: {fileID: 324677223}
@@ -3981,7 +3981,7 @@ MonoBehaviour:
   skilliconObject: {fileID: 426508024}
   Title: Summon Mind Wall
   Manatext: {fileID: 1121182826}
-  ToolTip: "Build a brick wall that blocks things. Has 2 Health. \n\nWall has a fortify
+  ToolTip: "Build a brick wall that blocks things. Has 3 Health. \n\nWall has a fortify
     and sacrifice ability"
 --- !u!114 &543125480
 MonoBehaviour:
@@ -4543,7 +4543,7 @@ MonoBehaviour:
   maxCooldown: 5
   currentCooldown: 0
   manaCost: 4
-  maxUses: 3
+  maxUses: 2
   currentUses: 0
   useText: {fileID: 585934751}
   CooldownText: {fileID: 989262920}
@@ -7056,7 +7056,7 @@ MonoBehaviour:
   maxCooldown: 5
   currentCooldown: 0
   manaCost: 4
-  maxUses: 3
+  maxUses: 2
   currentUses: 0
   useText: {fileID: 152856160}
   CooldownText: {fileID: 77656205}
@@ -7403,10 +7403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8091198b1f8afe141af554deb5a2599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCooldown: 6
+  maxCooldown: 3
   currentCooldown: 0
-  manaCost: 1
-  maxUses: 2
+  manaCost: 4
+  maxUses: 5
   currentUses: 0
   useText: {fileID: 1897393902}
   CooldownText: {fileID: 666481562}
@@ -7430,9 +7430,13 @@ MonoBehaviour:
   infiniteUses: 0
   SkillIcon: {fileID: 21300000, guid: 5e46b62bffdd28149bdac4e01c3300a0, type: 3}
   skilliconObject: {fileID: 1477784514}
-  Title: TOY TRAIN BARRAGE
+  Title: 'GRANPA '
   Manatext: {fileID: 693629382}
-  ToolTip: Throws toy trains.
+  ToolTip: 'Call on the most reliable person you know, an old man with a bomb.
+
+    He
+    will explode for 3 damage on contact, but only moves when it''s the opponents
+    turn.'
 --- !u!114 &853175855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7799,8 +7803,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   physicsLayer: 8
-  maxFortressHealth: 5
-  currFortressHealth: 5
+  maxFortressHealth: 23
+  currFortressHealth: 23
   maxShieldHealth: 0
   currshieldHealth: 0
   maxMP: 3
@@ -11450,8 +11454,8 @@ RectTransform:
   m_GameObject: {fileID: 1477784512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.57573, y: 0.57573, z: 0.57573}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.76, y: 0.76, z: 0.76}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 853175850}
   m_RootOrder: -1
@@ -11481,7 +11485,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3c4b11998dd915944b4f57b29d67262c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68b7f1a0c4060f3498116ebead89c549, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15215,10 +15219,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8091198b1f8afe141af554deb5a2599f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCooldown: 2
+  maxCooldown: 3
   currentCooldown: 0
   manaCost: 2
-  maxUses: 10
+  maxUses: 1
   currentUses: 0
   useText: {fileID: 551501216}
   CooldownText: {fileID: 1845206771}
@@ -15239,7 +15243,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   playercharacter: {fileID: 1598857123}
-  infiniteUses: 0
+  infiniteUses: 1
   SkillIcon: {fileID: 21300000, guid: 5e46b62bffdd28149bdac4e01c3300a0, type: 3}
   skilliconObject: {fileID: 1097457149}
   Title: FINGER GUN
@@ -16529,8 +16533,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxCooldown: 5
   currentCooldown: 0
-  manaCost: 4
-  maxUses: 3
+  manaCost: 5
+  maxUses: 2
   currentUses: 0
   useText: {fileID: 1055578970}
   CooldownText: {fileID: 492134950}

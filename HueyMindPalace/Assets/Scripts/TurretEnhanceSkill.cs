@@ -81,7 +81,7 @@ public class TurretEnhanceSkill : MonoBehaviour
         manTurret.layer = (int)owner.physicsLayer;
 
         turret.hasManTurret = true;
-        turret.buildManTurretButton.SetActive(false);
+        turret.buildManTurretButton.transform.localScale = new Vector3(0, 0, 0);
         turret.shootManTurretButton.SetActive(true);
         skillInfo.endskillPreview(false);
     }

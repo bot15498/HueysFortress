@@ -129,7 +129,10 @@ public class CombatManager : MonoBehaviour
     {
         foreach (SkillInfo skill in player.skillInfos)
         {
-            skill.tickCooldown();
+            if (skill != null)
+            {
+                skill.tickCooldown();
+            }
         }
     }
 

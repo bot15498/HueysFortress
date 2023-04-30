@@ -7,7 +7,6 @@ public class OldMan : MonoBehaviour
     public int damage= 3;
     public float moveSpeed = 5f;
 
-    private PolygonCollider2D collider2d;
     private SpriteRenderer sprite;
     private CombatManager combat;
     private AudioManager am;
@@ -17,7 +16,6 @@ public class OldMan : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        collider2d = GetComponent<PolygonCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
         LayerMask groundmask = LayerMask.GetMask("Ground");
@@ -33,17 +31,13 @@ public class OldMan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(combat.currentPlayer != owner && combat.currPhase == PhaseType.MainPhase)
-        {
-            rb2d.velocity = Vector3.left * moveSpeed;
-        }
-        else
-        {
-            rb2d.velocity = Vector3.left * 0;
-        }
-
         // slowly move towards opponent. 
         Vector3 pos = transform.position;
+        if (combat.currentPlayer != owner && combat.currPhase == PhaseType.MainPhase)
+        {
+            pos.x -= Time.deltaTime* moveSpeed;
+        }        
+        
         int groundmask = 1 << 6;
         Vector3 dir = (new Vector3(0, -1, 0));
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 10, 0), dir, Mathf.Infinity, groundmask);
@@ -52,8 +46,8 @@ public class OldMan : MonoBehaviour
             //fixedPos.y = hit.point.y;
             // Debug.Log(hit.point.y);
             pos.y = hit.point.y;
-            transform.position = pos;
         }
+        transform.position = pos;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

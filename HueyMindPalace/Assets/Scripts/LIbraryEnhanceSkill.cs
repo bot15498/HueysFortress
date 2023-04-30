@@ -42,7 +42,7 @@ public class LIbraryEnhanceSkill : MonoBehaviour
         Camera.main.GetComponent<CameraFollow>().SetTarget(owner.transform);
         StartCoroutine(delay());
         owner.maxMP += manaIncrease;
-        owner.currMp += manaIncrease;
+        //owner.currMp += manaIncrease;
         skillInfo.endskillPreview(false);
     }
 

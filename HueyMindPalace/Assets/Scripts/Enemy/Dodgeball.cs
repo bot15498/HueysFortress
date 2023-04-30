@@ -26,8 +26,8 @@ public class Dodgeball : MonoBehaviour
         GameObject colliderObj = collision.collider.gameObject;
         if (colliderObj.tag == "Ground")
         {
+            Camera.main.GetComponent<CameraFollow>().StartGoBackToPlayer();
             Destroy(this.gameObject);
-            Camera.main.GetComponent<CameraFollow>().FollowCursor();
         }
         if (colliderObj.tag == "Building")
         {
@@ -35,6 +35,7 @@ public class Dodgeball : MonoBehaviour
             {
                 PlacedObject obj = colliderObj.GetComponent<PlacedObject>();
                 obj.TakeDamage(damage);
+                am.playclip(7, 0.5f);
             }
             else if (colliderObj.GetComponent<Fortress>() != null)
             {
@@ -43,8 +44,15 @@ public class Dodgeball : MonoBehaviour
                 fort.StartFlashRed();
                 am.playclip(6, 0.25f);
             }
+            Camera.main.GetComponent<CameraFollow>().StartGoBackToPlayer();
             Destroy(this.gameObject);
-            Camera.main.GetComponent<CameraFollow>().FollowCursor();
+        }
+        if (colliderObj.GetComponent<OldMan>() != null)
+        {
+            Camera.main.GetComponent<CameraFollow>().StartGoBackToPlayer();
+            am.playclip(7, 0.5f);
+            Destroy(colliderObj);
+            Destroy(this.gameObject);
         }
     }
 }

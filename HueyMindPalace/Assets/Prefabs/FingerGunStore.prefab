@@ -911,7 +911,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.1510005, y: -0.3589998}
+  m_AnchoredPosition: {x: -0.52, y: 0.74799985}
   m_SizeDelta: {x: 109.8787, y: 135.8754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1727430731007526542
@@ -966,8 +966,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxCooldown: 2
   currentCooldown: 0
-  manaCost: 2
-  maxUses: 10
+  manaCost: 4
+  maxUses: 3
   currentUses: 0
   useText: {fileID: 4770647968717248917}
   CooldownText: {fileID: 596881503141752414}
@@ -3399,7 +3399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.151, y: 0.24}
+  m_AnchoredPosition: {x: 0.721, y: 0.748}
   m_SizeDelta: {x: 109.8787, y: 135.8754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3000130088441700542
@@ -3455,7 +3455,7 @@ MonoBehaviour:
   maxCooldown: 1
   currentCooldown: 0
   manaCost: 2
-  maxUses: 3
+  maxUses: 2
   currentUses: 0
   useText: {fileID: 5961410126528125448}
   CooldownText: {fileID: 3800464834128723432}

@@ -93,8 +93,10 @@ public class Child : MonoBehaviour
                 // if train skill is available, use it.
                 trainSkill.StartSummonTrains();
                 Camera.main.GetComponent<CameraFollow>().FollowCursor();
-                wallSkillInfo.ActivateSkillPreview();
-                wallSkillInfo.endskillPreview(false);
+
+                trainSkillInfo.ActivateSkillPreview();
+                trainSkillInfo.endskillPreview(false);
+
                 yield return new WaitForSeconds(0.3f);
                 while (!trainSkill.isDone)
                 {
@@ -177,6 +179,8 @@ public class Child : MonoBehaviour
 
         // at the end.
         myChar.EndTurn();
+        myChar.currMp += 1;
+        myChar.maxMP += 1;
         isThinking = false;
         yield return null;
     }

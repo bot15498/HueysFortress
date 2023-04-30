@@ -15,11 +15,12 @@ public class CameraFollow : MonoBehaviour
     public float cursorMoveSpeed;
 
     private Vector3 targetPos;
+    private CombatManager combat;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
     }
 
     // Update is called once per frame
@@ -71,5 +72,18 @@ public class CameraFollow : MonoBehaviour
     {
         target = null;
         cursorMovement = true;
+    }
+
+    public void StartGoBackToPlayer()
+    {
+        StartCoroutine(GoBackToPlayer());
+    }
+
+    private IEnumerator GoBackToPlayer()
+    {
+        SetTarget(combat.currentPlayer.transform);
+        yield return new WaitForSeconds(2f);
+        FollowCursor();
+        yield return null;
     }
 }
