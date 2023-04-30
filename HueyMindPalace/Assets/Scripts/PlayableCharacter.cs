@@ -38,7 +38,6 @@ public class PlayableCharacter : MonoBehaviour
     {
         if(myChar.myTurn)
         {
-
             ToggleSkillUi();
             am.playclip(5, 0.25f);
         }

@@ -19,21 +19,25 @@ public class Library : MonoBehaviour, PlacedObject
     public Image ShieldBar;
     public GameObject shieldobject;
     public GameObject healthCanvas;
+    public GameObject skillsMenu;
 
     private bool _isPlaced = false;
     private bool _lastPlaced = false;
-    private BoxCollider2D box2d;
+    private PolygonCollider2D box2d;
     private SpriteRenderer sprite;
     private CombatManager combat;
+    private bool skillsOpen;
+    private AudioManager am;
     public bool isPlaced { get => _isPlaced; set => _isPlaced = value; }
     public bool lastPlaced { get => _lastPlaced; set => _lastPlaced = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        box2d = GetComponent<BoxCollider2D>();
+        box2d = GetComponent<PolygonCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         LayerMask groundmask = LayerMask.GetMask("Ground");
+        am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
         DisableAbility();
         if (combat == null)
         {
@@ -48,9 +52,21 @@ public class Library : MonoBehaviour, PlacedObject
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        HealthText.text = currHealth + "/" + maxHealth;
 
+        healthBar.fillAmount = (float)currHealth / maxHealth;
+        if (maxShieldHealth > 0)
+        {
+            shieldobject.SetActive(true);
+            ShieldBar.fillAmount = (float)maxShieldHealth / currshieldHealth;
+            ShieldText.text = currshieldHealth + "/" + maxShieldHealth;
+        }
+        else
+        {
+            shieldobject.SetActive(false);
+        }
     }
 
     public void DisableAbility()
@@ -90,12 +106,20 @@ public class Library : MonoBehaviour, PlacedObject
 
     public void SetCanPlaceColor()
     {
-        sprite.color = new Color(0, 1, 0);
+        // prevent spamming.
+        if (sprite != null)
+        {
+            sprite.color = new Color(0, 1, 0);
+        }
     }
 
     public void SetNoPlaceColor()
     {
-        sprite.color = new Color(1, 0, 0);
+        // prevent spamming.
+        if (sprite != null)
+        {
+            sprite.color = new Color(1, 0, 0);
+        }
     }
 
     public bool GetValidLocation(ref Vector3 worldpos)
@@ -109,11 +133,31 @@ public class Library : MonoBehaviour, PlacedObject
             worldpos.y = hit.point.y;
 
         }
-        else if (hit.collider.gameObject.tag != "Building")
-        {
-            return false;
-        }
 
         return true;
+    }
+
+    private void OnMouseDown()
+    {
+        if (owner.myTurn)
+        {
+            ToggleSkillUi();
+            am.playclip(5, 0.25f);
+        }
+    }
+
+    private void ToggleSkillUi()
+    {
+        if (skillsOpen == false)
+        {
+            skillsMenu.SetActive(true);
+            skillsMenu.GetComponent<SkillsAnimation>().openMenu();
+            skillsOpen = true;
+        }
+        else if (skillsOpen == true)
+        {
+            skillsMenu.GetComponent<SkillsAnimation>().closeMenu();
+            skillsOpen = false;
+        }
     }
 }
