@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Combat.unity
     guid: add8c8a1a2728f94fbfdcafc7c2a9b2a
+  - enabled: 1
+    path: Assets/Scenes/YouWinner.unity
+    guid: 09c45a143c071cd47ba6623145bf354b
+  - enabled: 1
+    path: Assets/Scenes/YouLoser.unity
+    guid: 4b7d000b9210d9649b1a029146a1af89
   m_configObjects: {}
