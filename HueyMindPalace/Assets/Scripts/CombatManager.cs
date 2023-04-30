@@ -116,11 +116,11 @@ public class CombatManager : MonoBehaviour
                 break;
             case PhaseType.Player1Wins:
                 Camera.main.GetComponent<CameraFollow>().SetTarget(player1.transform);
-                StartCoroutine(TransitionToWinnerScene());
+                StartCoroutine(TransitionToWinnerScene(2));
                 break;
             case PhaseType.Player2Wins:
                 Camera.main.GetComponent<CameraFollow>().SetTarget(player2.transform);
-                StartCoroutine(TransitionToWinnerScene());
+                StartCoroutine(TransitionToWinnerScene(3));
                 break;
         }
     }
@@ -133,11 +133,11 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    private IEnumerator TransitionToWinnerScene()
+    private IEnumerator TransitionToWinnerScene(int index)
     {
         Camera.main.GetComponent<CameraFollow>().SetTarget(player1.transform);
         mananimation.Play("ManWin");
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(index);
     }
 }
