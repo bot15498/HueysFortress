@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobRockSkill : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class LobRockSkill : MonoBehaviour
     private Character player;
     private SkillInfo skillInfo;
     private AudioManager am;
+    Animator mananimation;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class LobRockSkill : MonoBehaviour
         skillInfo = GetComponent<SkillInfo>();
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
         am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
+        mananimation = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UiManager>().manAnimation;
     }
 
     // Update is called once per frame
@@ -37,7 +40,7 @@ public class LobRockSkill : MonoBehaviour
             // draw path
             Vector3 diff = worldMousePos - player.gameObject.transform.position;
             diff.y = diff.y * 2;
-            Vector2[] trajectory = PredictPath(rockPrefab, maxForceScale * diff.y, diff, player.gameObject.transform.position, numLinePoints);
+            Vector2[] trajectory = PredictPath(rockPrefab, maxForceScale * diff.y, diff, player.gameObject.transform.position + new Vector3(-0.4f,1,0), numLinePoints);
             predictPath.positionCount = trajectory.Length;
             Vector3[] trajectory3d = new Vector3[trajectory.Length];
             for(int i=0; i<trajectory.Length; i++)
@@ -67,6 +70,7 @@ public class LobRockSkill : MonoBehaviour
 
     public void PreviewRockSkill()
     {
+        mananimation.Play("ManThrowPrep");
         player = combat.currentPlayer;
         isAiming = true;
     }
@@ -74,6 +78,8 @@ public class LobRockSkill : MonoBehaviour
     private void Shoot(Vector3 diff, float velocity)
     {
         GameObject rock = Instantiate(rockPrefab, player.gameObject.transform);
+        mananimation.Play("ManthrowRelease");
+        StartCoroutine(delay());
         rock.layer = (int)player.physicsLayer;
         Rigidbody2D rb2d = rock.GetComponent<Rigidbody2D>();
         rb2d.velocity = diff.normalized * velocity;
@@ -113,4 +119,15 @@ public class LobRockSkill : MonoBehaviour
 
         return results;
     }
+
+    IEnumerator delay()
+    {
+
+        yield return new WaitForSeconds(3f);
+        mananimation.Play("ManIsIdle");
+        
+    }
+
+
+
 }
