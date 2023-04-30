@@ -44,7 +44,7 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
         // when something isn't placed, disable a bunch of stuff.
         isPlaced = false;
         box2d.enabled = false;
-        sprite.color = new Color(0, 1, 0);
+        SetCanPlaceColor();
     }
 
     public void EnableAbility()
@@ -54,11 +54,18 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
         sprite.color = new Color(1, 1, 1);
     }
 
-    public Vector3 GetValidLocation(Vector3 worldpos)
+    public void SetCanPlaceColor()
     {
-        // Clamp the wall to be at y=0
-        Vector3 fixedPos = worldpos;
+        sprite.color = new Color(0, 1, 0);
+    }
 
+    public void SetNoPlaceColor()
+    {
+        sprite.color = new Color(1, 0, 0);
+    }
+
+    public bool GetValidLocation(ref Vector3 worldpos)
+    {
         int groundmask = 1 << 6;
         Vector3 dir = (new Vector3(0, -1, 0));
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 10, 0), dir, Mathf.Infinity, groundmask);
@@ -67,13 +74,13 @@ public class FingerGunStore : MonoBehaviour, PlacedObject
         {
             //fixedPos.y = hit.point.y;
             // Debug.Log(hit.point.y);
-            fixedPos.y = hit.point.y;
+            worldpos.y = hit.point.y;
 
         }
-        else if (hit.collider.gameObject.tag != "Ground")
+        else if (hit.collider.gameObject.tag != "Building")
         {
-            //fixedPos.y = hit.point.y;
+            return false;
         }
-        return fixedPos;
+        return true;
     }
 }

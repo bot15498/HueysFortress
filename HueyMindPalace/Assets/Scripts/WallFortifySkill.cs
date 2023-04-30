@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WallFortifySkill : MonoBehaviour
 {
+    public int shieldAmount = 2;
+
     [SerializeField]
     private Wall wall = null;
     private CombatManager combat;
@@ -26,10 +28,16 @@ public class WallFortifySkill : MonoBehaviour
     public void FortifyWall()
     {
         // give wall shield. 
+        wall.maxShieldHealth += shieldAmount;
+        wall.currshieldHealth += shieldAmount;
+        skillInfo.endskillPreview(false);
     }
 
     public void SacrificeWall()
     {
-
+        wall.owner.maxShieldHealth += wall.currHealth;
+        wall.owner.currshieldHealth += wall.currHealth;
+        Destroy(wall.gameObject);
+        skillInfo.endskillPreview(false);
     }
 }

@@ -9,20 +9,39 @@ public class Child : MonoBehaviour
     public bool isThinking = false;
     public int maxWalls = 2;
     public int maxTurrets = 2;
+    public GameObject skillsMenu;
+    // walls
     public List<Wall> walls;
+    public WallSkill wallSkill;
+    public float minWallBuildDist = 10f;
+    public float maxWallBuildDist = 20f;
+    private SkillInfo wallSkillInfo;
+    // trains
+    public TrainSkill trainSkill;
+    private SkillInfo trainSkillInfo;
+    // shoot
 
     private Character myChar;
     private CombatManager combat;
+    private bool openedSkillsMenu = false;
     // Start is called before the first frame update
     void Start()
     {
         myChar = GetComponent<Character>();
         combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
+
+        wallSkillInfo = wallSkill.GetComponent<SkillInfo>();
+        trainSkillInfo = trainSkill.GetComponent<SkillInfo>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!openedSkillsMenu)
+        {
+            skillsMenu.GetComponent<SkillsAnimation>().openMenu();
+            openedSkillsMenu = true;
+        }
         // wait until it's my turn.
         if (myChar.isReady && myChar.myTurn && combat.currPhase == PhaseType.MainPhase && !isThinking)
         {
@@ -35,6 +54,9 @@ public class Child : MonoBehaviour
     {
         // very dumb ai.
         bool doingAction = true;
+        bool placedWallThisTurn = false;
+        // let the child think for a second
+        yield return new WaitForSeconds(1f);
         while (doingAction)
         {
             if (false)
@@ -45,9 +67,27 @@ public class Child : MonoBehaviour
             {
                 // if wall doesn't have a turret, build one if you have mp and off cooldown
             }
-            else if (walls.Count < maxWalls && combat.turnNumber > 3)
+            else if (!placedWallThisTurn && walls.Count < maxWalls && wallSkillInfo.CanUseSkill())
             {
                 // build a new wall if you have mp and off cooldown. 
+                float xdiff = Random.Range(minWallBuildDist, maxWallBuildDist);
+                Vector3 buildpos = transform.position;
+                buildpos.x -= xdiff;
+                Wall newWall = wallSkill.PlaceWall(buildpos);
+                walls.Add(newWall);
+
+                // trigger the skill info stuff.
+                wallSkillInfo.ActivateSkillPreview();
+                wallSkillInfo.endskillPreview(false);
+
+                // wait a bit before making it a real wall.
+                yield return new WaitForSeconds(0.1f);
+                newWall.EnableAbility();
+
+                // Follwo the wall.
+                Camera.main.GetComponent<CameraFollow>().SetTarget(newWall.transform);
+                yield return new WaitForSeconds(1f);
+                placedWallThisTurn = true;
             }
             else if (false)
             {

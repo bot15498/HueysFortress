@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
     public bool hasFortress = false;
     public CombatManager combatManager;
     public GameObject fortressPrefab;
+    public Vector2 fortressSpawnLocation;
     public bool isReady = true;
     public List<PlacedObject> buildings = new List<PlacedObject>();
     UiManager uimanager;
@@ -55,11 +56,10 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void BuildFortress(float x, float y)
+    public void BuildFortress()
     {
         // Builds the initial fortress.
-        Instantiate(fortressPrefab, new Vector3(x, y), Quaternion.identity);
-        Debug.Log("Creating fortress");
+        Instantiate(fortressPrefab, fortressSpawnLocation, Quaternion.identity);
         hasFortress = true;
     }
 

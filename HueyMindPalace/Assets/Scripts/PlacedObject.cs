@@ -9,5 +9,5 @@ public interface PlacedObject
 
     public void EnableAbility();
     public void DisableAbility();
-    public Vector3 GetValidLocation(Vector3 worldpos);
+    public bool GetValidLocation(ref Vector3 worldpos);
 }

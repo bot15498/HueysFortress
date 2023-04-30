@@ -18,7 +18,7 @@ public class Rock : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.collider.gameObject.tag);
+        //Debug.Log(collision.collider.gameObject.tag);
         if(collision.collider.gameObject.tag == "Ground")
         {
             Camera.main.GetComponent<CameraFollow>().FollowCursor();
