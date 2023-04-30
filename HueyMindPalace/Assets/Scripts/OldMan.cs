@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dodgeball : MonoBehaviour
+public class OldMan : MonoBehaviour
 {
-    public int damage = 1;
-    public Rigidbody2D rb2d;
+    public int damage= 3;
+    public float moveSpeed = 5f;
+
+    private PolygonCollider2D collider2d;
+    private SpriteRenderer sprite;
+    private CombatManager combat;
     private AudioManager am;
+    private Character owner;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        collider2d = GetComponent<PolygonCollider2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        LayerMask groundmask = LayerMask.GetMask("Ground");
         am = GameObject.FindGameObjectWithTag("GameManager").GetComponent<AudioManager>();
+        if (combat == null)
+        {
+            // assume on creation, that the owner is whoever turn it is. 
+            combat = GameObject.FindGameObjectWithTag("GameManager").GetComponent<CombatManager>();
+            owner = combat.currentPlayer;
+        }
     }
 
     // Update is called once per frame
@@ -24,11 +37,6 @@ public class Dodgeball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject colliderObj = collision.collider.gameObject;
-        if (colliderObj.tag == "Ground")
-        {
-            Destroy(this.gameObject);
-            Camera.main.GetComponent<CameraFollow>().FollowCursor();
-        }
         if (colliderObj.tag == "Building")
         {
             if (colliderObj.GetComponent<PlacedObject>() != null)
@@ -41,10 +49,9 @@ public class Dodgeball : MonoBehaviour
                 Fortress fort = colliderObj.GetComponent<Fortress>();
                 fort.owner.TakeDamage(damage);
                 fort.StartFlashRed();
-                am.playclip(6, 0.25f);
             }
-            Destroy(this.gameObject);
             Camera.main.GetComponent<CameraFollow>().FollowCursor();
+            Destroy(this.gameObject);
         }
     }
 }
